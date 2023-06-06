@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:template_app/util/input_util.dart';
 import 'package:template_app/widget/common/my_bottom_bar.dart';
 
@@ -30,7 +31,7 @@ class ProfileEdit extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cập nhật thông tin cá nhân'),
+        title: Text('cap nhat thong tin ca nhan'.tr),
         backgroundColor: Colors.pink[100],
       ),
       body: SingleChildScrollView(
@@ -55,10 +56,10 @@ class ProfileEdit extends StatelessWidget {
                     padding: EdgeInsets.only(top: 24, bottom: 16),
                     child: Column(
                       children: [
-                        InputUtil.buildInput("Họ và tên", "Họ và tên", value: "", disabled: false),
-                        InputUtil.buildInput("Số điện thoại", "Số điện thoại", value: "", disabled: false),
+                        InputUtil.buildInput("Ho va ten", "Ho va ten", value: "", disabled: false),
+                        InputUtil.buildInput("So dien thoai", "So dien thoai", value: "", disabled: false),
                         InputUtil.buildInput("Email", 'Email', value: "", disabled: true),
-                        InputUtil.buildInput("Địa chỉ", "Địa chỉ", value: "", disabled: false),
+                        InputUtil.buildInput("Dia chi", "Dia chi", value: "", disabled: false),
                       ],
                     )),
                 Container(
@@ -76,7 +77,7 @@ class ProfileEdit extends StatelessWidget {
                     child: TextButton(
                       onPressed: () {},
                       child: Text(
-                        "Lưu",
+                        "luu".tr,
                         style: TextStyle(color: Colors.white, fontSize: 19),
                       ),
                     ),

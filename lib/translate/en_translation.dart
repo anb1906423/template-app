@@ -14,8 +14,21 @@ class EnTranslation extends Translations {
           "gio hang": "Cart",
           "tai khoan": "Account",
           "trang ca nhan": "Profile",
+          "cap nhat thong tin ca nhan": "Update personal information",
+          "thong tin ca nhan": "Personal information",
+          "chinh sua": "Edit",
           "dat hang": "Order",
-          "lich su don hang": "Order history",
+          "lich su don hang": "Orders purchased",
+          "ho va ten": "Fullname: ",
+          "so dien thoai": "Phone number: ",
+          "email": "Email: ",
+          "dia chi": "Address: ",
+          "Ho va ten": "Fullname",
+          "So dien thoai": "Phone number",
+          "Email": "Email",
+          "Dia chi": "Address",
+          "luu": "Save",
+
         }
       };
 }

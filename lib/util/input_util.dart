@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class InputUtil {
   static Widget buildInput(String title, String placeholder,
@@ -10,7 +11,7 @@ class InputUtil {
           Padding(
             padding: EdgeInsets.only(top: 6, bottom: 1),
             child: Text(
-              title,
+              title.tr,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 15,
@@ -25,7 +26,7 @@ class InputUtil {
             ),
             child: TextFormField(
               decoration: InputDecoration(
-                hintText: placeholder, // Gợi ý nếu input trống
+                hintText: placeholder.tr, // Gợi ý nếu input trống
                 border: InputBorder.none, // Loại bỏ đường viền mặc định
                 contentPadding: EdgeInsets.symmetric(
                     vertical: 12,

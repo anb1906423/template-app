@@ -11,7 +11,7 @@ class Cart extends GetView<CartController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(title: 'GIỎ HÀNG'.tr),
+      appBar: MyAppBar(title: 'gio hang'.tr),
       backgroundColor: Colors.grey.shade200,
       body: Column(
         children: <Widget>[
@@ -45,7 +45,8 @@ class Cart extends GetView<CartController> {
   Widget _buildPayment(BuildContext context) {
     return TextButton(
       style: TextButton.styleFrom(
-        padding: const EdgeInsets.only(top: 15, bottom: 15, left: 70, right: 70),
+        padding:
+            const EdgeInsets.only(top: 15, bottom: 15, left: 70, right: 70),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         backgroundColor: Colors.pink.shade100,
         //minimumSize: Size(double.infinity, 50)
@@ -71,8 +72,8 @@ class Cart extends GetView<CartController> {
       //       ),
       //     );
       // },
-      child: const Text(
-        "Đặt Hàng",
+      child: Text(
+        "dat hang".tr,
         style: TextStyle(
           fontSize: 20,
           color: Colors.white,
@@ -207,7 +208,8 @@ class Cart extends GetView<CartController> {
                   children: [
                     Text(
                       cardItem.title,
-                      style: const TextStyle(fontSize: 18, color: Color.fromARGB(255, 65, 54, 54)),
+                      style: const TextStyle(
+                          fontSize: 18, color: Color.fromARGB(255, 65, 54, 54)),
                     ),
                     Container(
                       margin: const EdgeInsets.only(
@@ -224,7 +226,8 @@ class Cart extends GetView<CartController> {
                           ),
                           const Text(
                             "\$",
-                            style: TextStyle(color: Colors.pinkAccent, fontSize: 15),
+                            style: TextStyle(
+                                color: Colors.pinkAccent, fontSize: 15),
                           ),
                           // const Spacer(),
                           const SizedBox(width: 120),
@@ -245,14 +248,17 @@ class Cart extends GetView<CartController> {
                                         size: 16,
                                       )),
                                   Container(
-                                    margin: const EdgeInsets.symmetric(horizontal: 3),
-                                    padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 2),
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 3),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 3, vertical: 2),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(3),
                                     ),
                                     child: Text(
                                       (cardItem.quantity).toStringAsFixed(0),
-                                      style: const TextStyle(color: Colors.black, fontSize: 16),
+                                      style: const TextStyle(
+                                          color: Colors.black, fontSize: 16),
                                     ),
                                   ),
                                   InkWell(

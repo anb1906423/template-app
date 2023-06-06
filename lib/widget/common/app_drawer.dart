@@ -47,7 +47,7 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.update, size: 24),
             title: Transform.translate(
               offset: const Offset(-16, 0),
-              child: const Text('Lịch Sử Đơn Hàng', style: const TextStyle(fontSize: 16)),
+              child: Text('lich su don hang'.tr, style: const TextStyle(fontSize: 16)),
             ),
             onTap: () => Get.toNamed("/history"),
           ),

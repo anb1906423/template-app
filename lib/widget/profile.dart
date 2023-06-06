@@ -10,7 +10,7 @@ class Profile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('trang ca nhan'),
+        title: Text('trang ca nhan'.tr),
         backgroundColor: Colors.pink[100],
       ),
       body: Container(
@@ -53,7 +53,7 @@ class Profile extends StatelessWidget {
                     padding: EdgeInsets.only(bottom: 8),
                     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                       Text(
-                        "Thông tin cá nhân",
+                        "thong tin ca nhan".tr,
                         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
                       ),
                       MouseRegion(
@@ -63,7 +63,7 @@ class Profile extends StatelessWidget {
                           child: InkWell(
                             onTap: () => Get.toNamed("/profile/edit"),
                             child: Text(
-                              'Chỉnh sửa',
+                              'chinh sua'.tr,
                               style: TextStyle(
                                 color: Colors.blue,
                                 decoration: TextDecoration.none,
@@ -82,10 +82,10 @@ class Profile extends StatelessWidget {
                   ),
                   Column(
                     children: [
-                      infoItemMothod("Họ và tên: ", "Lê Văn Sơn"),
-                      infoItemMothod("Số điện thoại: ", "0819222273"),
-                      infoItemMothod("Email: ", "email@gmail.com"),
-                      infoItemMothod("Địa chỉ: ", "Cái Răng, Cần Thơ"),
+                      infoItemMethod("ho va ten", "Lê Văn Sơn"),
+                      infoItemMethod("so dien thoai", "0819222273"),
+                      infoItemMethod("email", "email@gmail.com"),
+                      infoItemMethod("dia chi", "Cái Răng, Cần Thơ"),
                     ],
                   ),
                 ]),
@@ -98,16 +98,16 @@ class Profile extends StatelessWidget {
     );
   }
 
-  Row infoItemMothod(field, value) {
+  Row infoItemMethod(String field, String value) {
     return Row(children: [
       Padding(
           padding: EdgeInsets.only(top: 10, bottom: 10),
           child: Text(
-            field,
+            field.tr,
             style: TextStyle(fontSize: 18),
           )),
       Text(
-        value,
+        value.tr,
         style: TextStyle(fontSize: 18),
       ),
     ]);

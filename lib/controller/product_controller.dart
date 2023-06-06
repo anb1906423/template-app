@@ -26,7 +26,6 @@ class ProductController extends GetxController {
               ))
           .toList();
       products.assignAll(productModels);
-      print(productList);
     } catch (e) {
       print('Failed to fetch products: $e');
     }
