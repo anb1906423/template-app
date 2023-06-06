@@ -70,7 +70,7 @@ class ProfileEdit extends StatelessWidget {
                     width: double.infinity,
                     height: 56,
                     decoration: BoxDecoration(
-                      color: Color(0xFFF5CCCC), // Màu nền
+                      color: Colors.pink.shade100, // Màu nền
                       borderRadius: BorderRadius.circular(10), // Độ cong của góc
                     ),
                     child: TextButton(
