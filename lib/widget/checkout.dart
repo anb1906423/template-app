@@ -133,7 +133,7 @@ class Checkout extends GetView<CheckoutController> {
                               shape: const RoundedRectangleBorder(
                                 borderRadius: BorderRadius.all(Radius.circular(15.0)),
                               ),
-                              backgroundColor: AppConfig.btncolor,
+                              backgroundColor: Colors.pink.shade100,
                               foregroundColor: Colors.white,
 
                               ///
@@ -166,7 +166,7 @@ class Checkout extends GetView<CheckoutController> {
                               ///
                               label: Text(
                                 'XÁC NHẬN',
-                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white, backgroundColor: AppConfig.btncolor),
+                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
                               ),
                             ),
                           )
