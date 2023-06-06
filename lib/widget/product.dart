@@ -12,6 +12,8 @@ class Product extends GetView<ProductController> {
 
   @override
   Widget build(context) {
+    // Dùng getX gọi lớp ProductService
+    Get.put(ProductService());
     return Scaffold(
       appBar: MyAppBar(
         title: "san pham".tr,
