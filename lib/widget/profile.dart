@@ -10,7 +10,7 @@ class Profile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Trang cá nhân'),
+        title: const Text('trang ca nhan'),
         backgroundColor: Colors.pink[100],
       ),
       body: Container(
@@ -43,7 +43,6 @@ class Profile extends StatelessWidget {
               ),
               Container(
                 width: 350,
-                height: 250,
                 padding: EdgeInsets.all(13.0),
                 decoration: BoxDecoration(
                   color: Colors.white,

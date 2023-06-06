@@ -10,6 +10,12 @@ class ViTranslation extends Translations {
           "ngon ngu": "Ngôn ngữ",
           "tieng viet": "Tiếng Việt",
           "tieng anh": "Tiếng Anh",
+          "san pham": "Sản phẩm",
+          "gio hang": "Giỏ hàng",
+          "tai khoan": "Tài Khoản",
+          "trang ca nhan": "Trang cá nhân",
+          "dat hang": "Đặt hàng",
+          "lich su don hang": "Lịch sử đơn hàng",
 
         },
       };

@@ -1,8 +1,9 @@
+import '../config/api_config.dart';
 class ProductModel {
   final String id;
   final String title;
   final String description;
-  final double price;
+  final String price;
   final String imageUrl;
   final bool isFavorite;
 
@@ -19,7 +20,7 @@ class ProductModel {
     String? id,
     String? title,
     String? description,
-    double? price,
+    String? price,
     String? imageUrl,
     bool? isFavorite,
   }) {
@@ -43,12 +44,16 @@ class ProductModel {
   }
 
   static ProductModel fromJson(Map<String, dynamic> json) {
+    String host = API().host;
+    final imagePath = json['image'].replaceAll(r'\', '/').replaceFirst('public/', ''); // Thay đổi ký tự '\' thành '/'
+    final imageUrl = '$host/$imagePath';
+
     return ProductModel(
       id: json['id'],
-      title: json['title'],
+      title: json['name'],
       description: json['description'],
       price: json['price'],
-      imageUrl: json['imageUrl'],
+      imageUrl: imageUrl,
     );
   }
 }

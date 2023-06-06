@@ -10,6 +10,12 @@ class EnTranslation extends Translations {
           "ngon ngu": "Language",
           "tieng viet": "Vietnamese",
           "tieng anh": "English",
+          "san pham": "Product",
+          "gio hang": "Cart",
+          "tai khoan": "Account",
+          "trang ca nhan": "Profile",
+          "dat hang": "Order",
+          "lich su don hang": "Order history",
         }
       };
 }

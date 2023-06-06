@@ -5,6 +5,8 @@ import 'package:template_app/model/product_model.dart';
 import 'package:template_app/widget/common/my_app_bar.dart';
 import 'package:template_app/widget/common/my_bottom_bar.dart';
 
+import '../service/product_service.dart';
+
 class Product extends GetView<ProductController> {
   const Product({Key? key}) : super(key: key);
 
@@ -13,21 +15,23 @@ class Product extends GetView<ProductController> {
     return Scaffold(
       appBar: MyAppBar(
         title: "san pham".tr,
-        actions: [
-          _filter(),
-          _badge()
-        ],
+        actions: [_filter(), _badge()],
       ),
       backgroundColor: Colors.grey.shade200,
-      body: GridView.builder(
-        padding: const EdgeInsets.all(10.0),
-        itemCount: controller.products.length,
-        itemBuilder: (ctx, i) => _productGridTile(context: context, product: controller.products[i]),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 1.5 / 2,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
+      body: Obx(
+        () => GridView.builder(
+          padding: const EdgeInsets.all(10.0),
+          itemCount: controller.products.length,
+          itemBuilder: (ctx, i) => _productGridTile(
+            context: context,
+            product: controller.products[i],
+          ),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 1.5 / 2,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+          ),
         ),
       ),
       bottomNavigationBar: const MyBottomBar(index: 1),
