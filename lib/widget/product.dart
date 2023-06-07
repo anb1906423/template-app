@@ -4,7 +4,6 @@ import 'package:template_app/controller/product_controller.dart';
 import 'package:template_app/model/product_model.dart';
 import 'package:template_app/widget/common/my_app_bar.dart';
 import 'package:template_app/widget/common/my_bottom_bar.dart';
-
 import '../service/product_service.dart';
 
 class Product extends GetView<ProductController> {
@@ -117,7 +116,9 @@ class Product extends GetView<ProductController> {
       children: [
         IconButton(
           icon: const Icon(Icons.shopping_cart),
-          onPressed: () {},
+          onPressed: () {
+            Get.toNamed("/cart");
+          },
         ),
         Positioned(
           right: 8,
