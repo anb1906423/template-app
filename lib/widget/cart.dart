@@ -21,7 +21,7 @@ class Cart extends GetView<CartController> {
           ),
           _buildPayment(context),
           SizedBox(
-            height: 50,
+            height: 20,
           ),
         ],
       ),
@@ -43,40 +43,43 @@ class Cart extends GetView<CartController> {
   }
 
   Widget _buildPayment(BuildContext context) {
-    return TextButton(
-      style: TextButton.styleFrom(
-        padding:
-            const EdgeInsets.only(top: 15, bottom: 15, left: 70, right: 70),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        backgroundColor: Colors.pink.shade100,
-        //minimumSize: Size(double.infinity, 50)
-      ),
-      onPressed: () => Get.toNamed("/checkout"),
-      // onPressed: () {
-      //   final cart = context.read<CartManager>();
-      //   cart.addItem(product);
-      //   ScaffoldMessenger.of(context)
-      //     ..hideCurrentSnackBar()
-      //     ..showSnackBar(
-      //       SnackBar(
-      //         content: const Text(
-      //           'Sản phẩm được thêm vào giỏ hàng',
-      //         ),
-      //         duration: const Duration(seconds: 2),
-      //         action: SnackBarAction(
-      //           label: 'Trở lại',
-      //           onPressed: () {
-      //             cart.removeSingleItem(product.id!);
-      //           },
-      //         ),
-      //       ),
-      //     );
-      // },
-      child: Text(
-        "dat hang".tr,
-        style: TextStyle(
-          fontSize: 20,
-          color: Colors.white,
+    return Container(
+      margin: EdgeInsets.only(top: 20),
+      child: TextButton(
+        style: TextButton.styleFrom(
+          padding:
+              const EdgeInsets.only(top: 15, bottom: 15, left: 70, right: 70),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          backgroundColor: Colors.pink.shade100,
+          //minimumSize: Size(double.infinity, 50)
+        ),
+        onPressed: () => Get.toNamed("/checkout"),
+        // onPressed: () {
+        //   final cart = context.read<CartManager>();
+        //   cart.addItem(product);
+        //   ScaffoldMessenger.of(context)
+        //     ..hideCurrentSnackBar()
+        //     ..showSnackBar(
+        //       SnackBar(
+        //         content: const Text(
+        //           'Sản phẩm được thêm vào giỏ hàng',
+        //         ),
+        //         duration: const Duration(seconds: 2),
+        //         action: SnackBarAction(
+        //           label: 'Trở lại',
+        //           onPressed: () {
+        //             cart.removeSingleItem(product.id!);
+        //           },
+        //         ),
+        //       ),
+        //     );
+        // },
+        child: Text(
+          "dat hang".tr,
+          style: TextStyle(
+            fontSize: 20,
+            color: Colors.white,
+          ),
         ),
       ),
     );
@@ -166,7 +169,6 @@ class Cart extends GetView<CartController> {
       // },
       child: Container(
         margin: EdgeInsets.all(12),
-        padding: EdgeInsets.all(8),
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: const BorderRadius.all(
@@ -180,104 +182,113 @@ class Cart extends GetView<CartController> {
                 color: Colors.grey,
               ),
             ]),
-        child: Row(
-          children: [
-            SizedBox(
-              width: 90,
-              child: AspectRatio(
-                aspectRatio: 0.9,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Image.asset(
-                    cardItem.imageUrl,
-                    // width: 0,
-                    // height: 0,
-                    fit: BoxFit.cover,
+        child: Container(
+          padding: EdgeInsets.all(10),
+          child: Row(
+            children: [
+              SizedBox(
+                width: 90,
+                child: AspectRatio(
+                  aspectRatio: 0.9,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10.0),
+                      child: Image.asset(
+                        cardItem.imageUrl,
+                        // width: 0,
+                        // height: 0,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 10, bottom: 30),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      cardItem.title,
-                      style: const TextStyle(
-                          fontSize: 18, color: Color.fromARGB(255, 65, 54, 54)),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(
-                        top: 10,
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10, bottom: 30),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        cardItem.title,
+                        style: const TextStyle(
+                            fontSize: 18,
+                            color: Color.fromARGB(255, 65, 54, 54)),
                       ),
-                      child: Row(
-                        children: [
-                          Text(
-                            (cardItem.price).toStringAsFixed(2),
-                            style: const TextStyle(
-                              fontSize: 15,
-                              color: Colors.pinkAccent,
-                            ),
-                          ),
-                          const Text(
-                            "\$",
-                            style: TextStyle(
-                                color: Colors.pinkAccent, fontSize: 15),
-                          ),
-                          // const Spacer(),
-                          const SizedBox(width: 120),
-                          Container(
-                              padding: const EdgeInsets.all(3),
-                              decoration: BoxDecoration(
-                                // color: buttonColor,
-                                borderRadius: BorderRadius.circular(20),
-                                color: Colors.pink[50],
+                      Container(
+                        margin: const EdgeInsets.only(
+                          top: 10,
+                        ),
+                        child: Row(
+                          children: [
+                            Text(
+                              (cardItem.price).toStringAsFixed(2),
+                              style: const TextStyle(
+                                fontSize: 15,
+                                color: Colors.pinkAccent,
                               ),
-                              child: Row(
-                                children: [
-                                  InkWell(
-                                      onTap: () {},
-                                      child: const Icon(
-                                        Icons.remove,
-                                        color: Color.fromARGB(255, 211, 36, 91),
-                                        size: 16,
-                                      )),
-                                  Container(
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 3),
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 3, vertical: 2),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(3),
+                            ),
+                            const Text(
+                              "\$",
+                              style: TextStyle(
+                                  color: Colors.pinkAccent, fontSize: 15),
+                            ),
+                            // const Spacer(),
+                            const SizedBox(width: 120),
+                            Container(
+                                padding: const EdgeInsets.all(3),
+                                decoration: BoxDecoration(
+                                  // color: buttonColor,
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Colors.pink[50],
+                                ),
+                                child: Row(
+                                  children: [
+                                    InkWell(
+                                        onTap: () {},
+                                        child: const Icon(
+                                          Icons.remove,
+                                          color:
+                                              Color.fromARGB(255, 211, 36, 91),
+                                          size: 16,
+                                        )),
+                                    Container(
+                                      margin: const EdgeInsets.symmetric(
+                                          horizontal: 3),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 3, vertical: 2),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(3),
+                                      ),
+                                      child: Text(
+                                        (cardItem.quantity).toStringAsFixed(0),
+                                        style: const TextStyle(
+                                            color: Colors.black, fontSize: 16),
+                                      ),
                                     ),
-                                    child: Text(
-                                      (cardItem.quantity).toStringAsFixed(0),
-                                      style: const TextStyle(
-                                          color: Colors.black, fontSize: 16),
-                                    ),
-                                  ),
-                                  InkWell(
-                                      onTap: () {},
-                                      child: const Icon(
-                                        Icons.add,
-                                        color: Color.fromARGB(255, 211, 36, 91),
-                                        size: 16,
-                                      )),
-                                ],
-                              )),
-                        ],
+                                    InkWell(
+                                        onTap: () {},
+                                        child: const Icon(
+                                          Icons.add,
+                                          color:
+                                              Color.fromARGB(255, 211, 36, 91),
+                                          size: 16,
+                                        )),
+                                  ],
+                                )),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

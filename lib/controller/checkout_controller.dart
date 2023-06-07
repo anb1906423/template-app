@@ -10,5 +10,19 @@ class CheckoutController extends GetxController {
       quantity: 2,
       imageUrl: "assets/images/Tulip.jpg",
     ),
+    CartItemModel(
+      id: 'c1',
+      title: 'Tulip',
+      price: 11.02,
+      quantity: 2,
+      imageUrl: "assets/images/Tulip.jpg",
+    ),
+    CartItemModel(
+      id: 'c1',
+      title: 'Tulip',
+      price: 11.02,
+      quantity: 2,
+      imageUrl: "assets/images/Tulip.jpg",
+    ),
   ];
 }

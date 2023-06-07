@@ -52,84 +52,29 @@ class Checkout extends GetView<CheckoutController> {
                 ),
                 child: Column(
                   children: <Widget>[
-                    Row(
-                      children: [
-                        Icon(Icons.person_rounded),
-                        SizedBox(width: 15),
-                        Text(
-                          "Lý Thị Hồng Cẫm Nhi",
-                          style: TextStyle(
-                              fontSize: 18,
-                              fontFamily: AutofillHints.addressCity),
-                        ),
-                        Spacer(),
-                        _uesrInfo(context),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.phone,
-                          color: Colors.green,
-                        ),
-                        SizedBox(width: 15),
-                        Text(
-                          "0193758947",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontFamily: AutofillHints.addressCity,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.location_pin,
-                          color: Colors.red,
-                        ),
-                        SizedBox(width: 15),
-                        Text(
-                          "Ninh Kiều, Cần Thơ",
-                          style: TextStyle(
-                              fontSize: 18,
-                              fontFamily: AutofillHints.addressCity),
-                        ),
-                      ],
-                    ),
-                    const Divider(),
-                    Row(
-                      children: [
-                        Text(
-                          "Tổng tiền hàng: 30.01 \$",
-                          style: TextStyle(
-                              fontSize: 18,
-                              fontFamily: AutofillHints.addressCity),
-                        ),
-                      ],
-                    ),
-                    const Divider(),
-                    Row(
-                      children: [
-                        Text(
-                          "Phí vận chuyển: 1.05 \$",
-                          style: TextStyle(
-                              fontSize: 18,
-                              fontFamily: AutofillHints.addressCity),
-                        ),
-                      ],
-                    ),
-                    const Divider(),
-                    Row(
-                      children: [
-                        Text(
-                          "Tổng thanh toán: 31.06 \$",
-                          style: TextStyle(
-                              fontSize: 18,
-                              fontFamily: AutofillHints.addressCity),
-                        ),
-                      ],
-                    ),
+                    Row(children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildRowWithIcon(context, "Lý Thị Hồng Cẫm Nhi",
+                              Icons.person_rounded,
+                              isShow: true),
+                          const Divider(),
+                          _buildRowWithIcon(context, "0193758947", Icons.phone,
+                              iconColor: Colors.green, isShow: false),
+                          const Divider(),
+                          _buildRowWithIcon(
+                              context, "Ninh Kiều, Cần Thơ", Icons.location_pin,
+                              iconColor: Colors.red, isShow: false),
+                          const Divider(),
+                          _buildRow("Tổng tiền hàng: 30.01 \$"),
+                          const Divider(),
+                          _buildRow("Phí vận chuyển: 1.05 \$"),
+                          const Divider(),
+                          _buildRow("Tổng thanh toán: 31.06 \$"),
+                        ],
+                      ),
+                    ]),
                     Padding(
                       padding: const EdgeInsets.only(top: 20, bottom: 10),
                       child: Row(
@@ -175,6 +120,7 @@ class Checkout extends GetView<CheckoutController> {
                                   ],
                                 ),
                               ),
+
                               ///
                               label: Text(
                                 'XÁC NHẬN',
@@ -198,15 +144,54 @@ class Checkout extends GetView<CheckoutController> {
     );
   }
 
+  Widget _buildRowWithIcon(BuildContext context, String text, IconData icon,
+      {Color? iconColor, bool isShow = true}) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            Icon(icon, color: iconColor),
+            SizedBox(width: 15),
+            Text(
+              text,
+              style: TextStyle(
+                fontSize: 18,
+                fontFamily: AutofillHints.addressCity,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          width: 100,
+        ), // SizedBox sẽ chiếm hết phần dư màn hình
+        if (isShow) _uesrInfo(context),
+      ],
+    );
+  }
+
   Widget _uesrInfo(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        CircleAvatar(
-          backgroundColor: Colors.pink[50],
-          child: IconButton(
-            onPressed: () => {},
-            icon: const Icon(Icons.create),
+    return Container(
+      child: CircleAvatar(
+        backgroundColor: Colors.pink[50],
+        child: IconButton(
+          onPressed: () => {
+            Get.toNamed("/profile/edit"),
+          },
+          icon: const Icon(Icons.create),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildRow(String text) {
+    return Row(
+      children: [
+        Text(
+          text,
+          style: const TextStyle(
+            fontSize: 18,
+            fontFamily: AutofillHints.addressCity,
           ),
         ),
       ],
@@ -252,55 +237,65 @@ class Checkout extends GetView<CheckoutController> {
               color: AppConfig.buttonColor,
             ),
           ]),
-      child: Row(
-        children: [
-          Image.asset(
-            flower.imageUrl,
-            width: 70,
-            height: 70,
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 10, bottom: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        flower.title,
-                        style: const TextStyle(
-                            fontSize: 20,
-                            color: Color.fromARGB(255, 65, 54, 54)),
-                      ),
-                      const Spacer(),
-                      const Text(
-                        "x",
-                      ),
-                      Text(
-                        (flower.quantity).toStringAsFixed(0),
-                        style:
-                            const TextStyle(color: Colors.black, fontSize: 16),
-                      ),
-                      const SizedBox(width: 15),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        (flower.price).toStringAsFixed(2),
-                        style: const TextStyle(
-                          fontSize: 15,
-                          color: Colors.pinkAccent,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+      child: Container(
+        padding: EdgeInsets.all(10),
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius:
+                  BorderRadius.circular(10.0), // Border radius cho hình ảnh
+              child: Image.asset(
+                flower.imageUrl,
+                width: 70,
+                height: 70,
               ),
             ),
-          ),
-        ],
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          flower.title,
+                          style: const TextStyle(
+                              fontSize: 20,
+                              color: Color.fromARGB(255, 65, 54, 54)),
+                        ),
+                        const Spacer(),
+                        const Text(
+                          "x",
+                        ),
+                        Text(
+                          (flower.quantity).toStringAsFixed(0),
+                          style: const TextStyle(
+                              color: Colors.black, fontSize: 16),
+                        ),
+                        const SizedBox(width: 15),
+                      ],
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(top: 10),
+                      child: Row(
+                        children: [
+                          Text(
+                            (flower.price).toStringAsFixed(2),
+                            style: const TextStyle(
+                              fontSize: 15,
+                              color: Colors.pinkAccent,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
