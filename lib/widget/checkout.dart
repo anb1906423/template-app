@@ -163,14 +163,14 @@ class Checkout extends GetView<CheckoutController> {
           ],
         ),
         SizedBox(
-          width: 100,
+          width: 80,
         ), // SizedBox sẽ chiếm hết phần dư màn hình
-        if (isShow) _uesrInfo(context),
+        if (isShow) _userInfo(context),
       ],
     );
   }
 
-  Widget _uesrInfo(BuildContext context) {
+  Widget _userInfo(BuildContext context) {
     return Container(
       child: CircleAvatar(
         backgroundColor: Colors.pink[50],
