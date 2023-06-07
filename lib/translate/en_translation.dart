@@ -28,6 +28,7 @@ class EnTranslation extends Translations {
           "Email": "Email",
           "Dia chi": "Address",
           "luu": "Save",
+          "chi tiet": "Detail",
 
         }
       };

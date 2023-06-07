@@ -39,16 +39,13 @@ class ProductDetail extends GetView<ProductDetailController> {
                       fontStyle: FontStyle.italic,
                     ),
                   ),
-                  const SizedBox(width: 180),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Container(
-                      child: Text(
-                        controller.product?.price.toString() ?? "",
-                        style: const TextStyle(
-                          color: Color.fromARGB(255, 92, 92, 92),
-                          fontSize: 20,
-                        ),
+                  const Spacer(), // Thêm Spacer widget vào đây
+                  Container(
+                    child: Text(
+                      controller.product?.price.toString() ?? "",
+                      style: const TextStyle(
+                        color: Color.fromARGB(255, 92, 92, 92),
+                        fontSize: 20,
                       ),
                     ),
                   ),
@@ -57,7 +54,9 @@ class ProductDetail extends GetView<ProductDetailController> {
             ),
             IconButton(
               icon: Icon(
-                controller.product!.isFavorite ? Icons.favorite : Icons.favorite_border,
+                controller.product!.isFavorite
+                    ? Icons.favorite
+                    : Icons.favorite_border,
               ),
               color: Colors.red,
               onPressed: () {
@@ -92,8 +91,10 @@ class ProductDetail extends GetView<ProductDetailController> {
                 ),
                 child: TextButton(
                   style: TextButton.styleFrom(
-                    padding: const EdgeInsets.only(top: 15, bottom: 15, left: 50, right: 50),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    padding: const EdgeInsets.only(
+                        top: 15, bottom: 15, left: 50, right: 50),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
                     backgroundColor: Colors.pink.shade100,
                   ),
                   onPressed: () {},

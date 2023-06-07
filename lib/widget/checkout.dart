@@ -58,7 +58,9 @@ class Checkout extends GetView<CheckoutController> {
                         SizedBox(width: 15),
                         Text(
                           "Lý Thị Hồng Cẫm Nhi",
-                          style: TextStyle(fontSize: 18, fontFamily: AutofillHints.addressCity),
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontFamily: AutofillHints.addressCity),
                         ),
                         Spacer(),
                         _uesrInfo(context),
@@ -89,7 +91,9 @@ class Checkout extends GetView<CheckoutController> {
                         SizedBox(width: 15),
                         Text(
                           "Ninh Kiều, Cần Thơ",
-                          style: TextStyle(fontSize: 18, fontFamily: AutofillHints.addressCity),
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontFamily: AutofillHints.addressCity),
                         ),
                       ],
                     ),
@@ -98,7 +102,9 @@ class Checkout extends GetView<CheckoutController> {
                       children: [
                         Text(
                           "Tổng tiền hàng: 30.01 \$",
-                          style: TextStyle(fontSize: 18, fontFamily: AutofillHints.addressCity),
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontFamily: AutofillHints.addressCity),
                         ),
                       ],
                     ),
@@ -107,7 +113,9 @@ class Checkout extends GetView<CheckoutController> {
                       children: [
                         Text(
                           "Phí vận chuyển: 1.05 \$",
-                          style: TextStyle(fontSize: 18, fontFamily: AutofillHints.addressCity),
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontFamily: AutofillHints.addressCity),
                         ),
                       ],
                     ),
@@ -116,7 +124,9 @@ class Checkout extends GetView<CheckoutController> {
                       children: [
                         Text(
                           "Tổng thanh toán: 31.06 \$",
-                          style: TextStyle(fontSize: 18, fontFamily: AutofillHints.addressCity),
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontFamily: AutofillHints.addressCity),
                         ),
                       ],
                     ),
@@ -131,7 +141,8 @@ class Checkout extends GetView<CheckoutController> {
                             height: 52,
                             child: FloatingActionButton.extended(
                               shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15.0)),
                               ),
                               backgroundColor: Colors.pink.shade100,
                               foregroundColor: Colors.white,
@@ -142,14 +153,16 @@ class Checkout extends GetView<CheckoutController> {
                                 builder: (BuildContext context) => AlertDialog(
                                   content: const Text(
                                     'Xác nhận đặt hàng',
-                                    style: TextStyle(color: Colors.black, fontSize: 20),
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 20),
                                   ),
                                   actions: <Widget>[
                                     TextButton(
                                       onPressed: () => Navigator.pop(context),
                                       child: const Text(
                                         'Hủy',
-                                        style: TextStyle(color: Colors.red, fontSize: 20),
+                                        style: TextStyle(
+                                            color: Colors.red, fontSize: 20),
                                       ),
                                     ),
                                     TextButton(
@@ -162,11 +175,13 @@ class Checkout extends GetView<CheckoutController> {
                                   ],
                                 ),
                               ),
-
                               ///
                               label: Text(
                                 'XÁC NHẬN',
-                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
                               ),
                             ),
                           )
@@ -255,7 +270,8 @@ class Checkout extends GetView<CheckoutController> {
                       Text(
                         flower.title,
                         style: const TextStyle(
-                            fontSize: 20, color: Color.fromARGB(255, 65, 54, 54)),
+                            fontSize: 20,
+                            color: Color.fromARGB(255, 65, 54, 54)),
                       ),
                       const Spacer(),
                       const Text(
@@ -263,9 +279,8 @@ class Checkout extends GetView<CheckoutController> {
                       ),
                       Text(
                         (flower.quantity).toStringAsFixed(0),
-                        style: const TextStyle(
-                            color: Colors.black, fontSize: 16),
-
+                        style:
+                            const TextStyle(color: Colors.black, fontSize: 16),
                       ),
                       const SizedBox(width: 15),
                     ],

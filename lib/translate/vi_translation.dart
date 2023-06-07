@@ -28,6 +28,7 @@ class ViTranslation extends Translations {
           "Email": "Email",
           "Dia chi": "Địa chỉ",
           "luu": "Lưu",
+          "chi tiet": "Chi tiết",
 
         },
       };
