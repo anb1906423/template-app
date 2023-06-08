@@ -29,6 +29,8 @@ class EnTranslation extends Translations {
           "Dia chi": "Address",
           "luu": "Save",
           "chi tiet": "Detail",
+          "chua cap nhat": "Not update",
+          "danh sach san pham dang trong!": "Product list is empty!",
 
         }
       };

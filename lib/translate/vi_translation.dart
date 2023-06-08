@@ -29,6 +29,8 @@ class ViTranslation extends Translations {
           "Dia chi": "Địa chỉ",
           "luu": "Lưu",
           "chi tiet": "Chi tiết",
+          "chua cap nhat": "Chưa cập nhật",
+          "danh sach san pham dang trong!": "Danh sách sản phẩm đang trống!",
 
         },
       };
