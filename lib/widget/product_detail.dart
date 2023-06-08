@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:template_app/controller/product_detail_controller.dart';
 import 'package:template_app/widget/common/my_app_bar.dart';
 import 'package:template_app/widget/common/my_bottom_bar.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 class ProductDetail extends GetView<ProductDetailController> {
   const ProductDetail({Key? key}) : super(key: key);
@@ -25,7 +26,7 @@ class ProductDetail extends GetView<ProductDetailController> {
             ),
             Container(
               margin: const EdgeInsets.only(top: 20, bottom: 20),
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               width: double.infinity,
               child: Row(
                 children: <Widget>[
@@ -65,15 +66,31 @@ class ProductDetail extends GetView<ProductDetailController> {
             ),
             Container(
               margin: const EdgeInsets.only(top: 20, bottom: 20),
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               width: double.infinity,
-              child: Text(
-                controller.product!.description,
-                textAlign: TextAlign.left,
-                softWrap: true,
-                style: const TextStyle(
-                  fontSize: 15,
-                ),
+              child: Html(
+                data: controller.product!.description,
+                style: {
+                  "body": Style(
+                    fontSize: FontSize(15),
+                  ),
+                },
+                // customTextStyle: (node, baseStyle) {
+                //   if (node is dom.Element) {
+                //     switch (node.localName) {
+                //       case "strong":
+                //         return baseStyle.copyWith(fontWeight: FontWeight.bold);
+                //       // Các phần tử HTML khác có thể được xử lý tương tự
+                //     }
+                //   }
+                //   return baseStyle;
+                // },
+                // onLinkTap: (url) {
+                //   // Xử lý khi người dùng nhấp vào liên kết
+                // },
+                // onImageTap: (src) {
+                //   // Xử lý khi người dùng nhấp vào hình ảnh
+                // },
               ),
             ),
             Container(

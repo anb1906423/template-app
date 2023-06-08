@@ -14,4 +14,12 @@ class API {
     return '$baseUrl/order/detail/$orderId';
   }
 
+  static String userRegister() {
+    return '$baseUrl/user/registration';
+  }
+
+  static String userLogin() {
+    return '$baseUrl/user/login';
+  }
+
 }

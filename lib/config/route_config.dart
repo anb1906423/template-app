@@ -9,11 +9,13 @@ import 'package:template_app/widget/product_detail.dart';
 import 'package:template_app/widget/profile.dart';
 import 'package:template_app/widget/profile_edit.dart';
 import 'package:template_app/widget/setting_language.dart';
+import '../widget/login.dart';
+import '../widget/register.dart';
 
 class RouteConfig {
   static get routes {
     return [
-      GetPage(name: "/home", page: () => const Home(), binding: AllBinding()),
+      GetPage(name: "/home", page: () => Home(), binding: AllBinding()),
       GetPage(name: "/product", page: () => const Product(), binding: AllBinding()),
       GetPage(name: "/product/detail/:id", page: () => const ProductDetail(), binding: AllBinding()),
       GetPage(name: "/cart", page: () => const Cart(), binding: AllBinding()),
@@ -22,6 +24,8 @@ class RouteConfig {
       GetPage(name: "/profile/edit", page: () => const ProfileEdit(), binding: AllBinding()),
       GetPage(name: "/history", page: () => const History(), binding: AllBinding()),
       GetPage(name: "/setting/language", page: () => const SettingLanguage(), binding: AllBinding()),
+      GetPage(name: "/register", page: () => const Register(), binding: AllBinding()),
+      GetPage(name: "/login", page: () => Login(), binding: AllBinding()),
     ];
   }
 }
