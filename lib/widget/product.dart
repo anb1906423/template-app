@@ -21,20 +21,31 @@ class Product extends GetView<ProductController> {
       ),
       backgroundColor: Colors.grey.shade200,
       body: Obx(
-        () => GridView.builder(
-          padding: const EdgeInsets.all(10.0),
-          itemCount: controller.products.length,
-          itemBuilder: (ctx, i) => _productGridTile(
-            context: context,
-            product: controller.products[i],
-          ),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 1.5 / 2,
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-          ),
-        ),
+        () {
+          if (controller.products.isEmpty) {
+            return Center(
+              child: Text(
+                "danh sach san pham dang trong!".tr,
+                style: TextStyle(fontSize: 18),
+              ),
+            );
+          } else {
+            return GridView.builder(
+              padding: const EdgeInsets.all(10.0),
+              itemCount: controller.products.length,
+              itemBuilder: (ctx, i) => _productGridTile(
+                context: context,
+                product: controller.products[i],
+              ),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 1.5 / 2,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+              ),
+            );
+          }
+        },
       ),
       bottomNavigationBar: const MyBottomBar(index: 1),
     );
