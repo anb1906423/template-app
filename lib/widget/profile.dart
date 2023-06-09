@@ -11,11 +11,12 @@ class Profile extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('trang ca nhan'.tr),
-        backgroundColor: Colors.pink[100],
+        backgroundColor: Colors.pink.shade100,
       ),
+      backgroundColor: Colors.pink.shade50,
       body: Container(
         padding: EdgeInsets.only(top: 24, bottom: 16),
-        color: AppConfig.buttonColor,
+        // color: AppConfig.buttonColor,
         child: Center(
           child: Column(
             children: [

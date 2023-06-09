@@ -16,7 +16,7 @@ class Home extends GetView<ProductController> {
     Get.put(ProductService());
 
     return Scaffold(
-      backgroundColor: Colors.grey.shade200,
+      backgroundColor: Colors.pink.shade50,
       appBar: MyAppBar(title: "trang chu".tr),
       body: SingleChildScrollView(
         child: Column(
@@ -130,7 +130,7 @@ class Home extends GetView<ProductController> {
                   ),
                 ],
               ),
-              //
+              
             ),
           ),
         ],

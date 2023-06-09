@@ -12,7 +12,7 @@ class ProductDetail extends GetView<ProductDetailController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppBar(title: 'chi tiet'.tr),
-      backgroundColor: Colors.grey.shade200,
+      backgroundColor: Colors.pink.shade50,
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
