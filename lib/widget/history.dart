@@ -17,6 +17,7 @@ class History extends GetView<HistoryController> {
         title: const Text('Lịch Sử Đơn Hàng'),
         backgroundColor: Colors.pink.shade100,
       ),
+      backgroundColor: Colors.pink.shade50,
       body: ListView.builder(
         itemCount: controller.histories.length,
         itemBuilder: (ctx, i) => _OrderItemCard(history:  controller.histories[i]),

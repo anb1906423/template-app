@@ -18,7 +18,7 @@ class Product extends GetView<ProductController> {
         title: "san pham".tr,
         actions: [_filter(), _badge()],
       ),
-      backgroundColor: Colors.grey.shade200,
+      backgroundColor: Colors.pink.shade50,
       body: Obx(
         () {
           if (controller.products.isEmpty) {

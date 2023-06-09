@@ -12,7 +12,7 @@ class Cart extends GetView<CartController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppBar(title: 'gio hang'.tr),
-      backgroundColor: Colors.grey.shade200,
+      backgroundColor: Colors.pink.shade50,
       body: Column(
         children: <Widget>[
           _buildCartSummary(context),
