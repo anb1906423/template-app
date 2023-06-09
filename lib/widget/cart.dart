@@ -49,7 +49,8 @@ class Cart extends GetView<CartController> {
         style: TextButton.styleFrom(
           padding:
               const EdgeInsets.only(top: 15, bottom: 15, left: 70, right: 70),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           backgroundColor: Colors.pink.shade100,
           //minimumSize: Size(double.infinity, 50)
         ),
@@ -137,6 +138,7 @@ class Cart extends GetView<CartController> {
     required productId,
     required cardItem,
   }) {
+    final cartController = Get.find<CartController>();
     return Dismissible(
       key: ValueKey(cardItem.id),
       background: Container(
@@ -238,9 +240,10 @@ class Cart extends GetView<CartController> {
                                   color: Colors.pinkAccent, fontSize: 15),
                             ),
                             // const Spacer(),
-                            const SizedBox(width: 120),
+                            const SizedBox(width: 100),
                             Container(
-                                padding: const EdgeInsets.all(3),
+                                padding: const EdgeInsets.only(
+                                    top: 2, bottom: 2, left: 10, right: 10),
                                 decoration: BoxDecoration(
                                   // color: buttonColor,
                                   borderRadius: BorderRadius.circular(20),
@@ -249,13 +252,15 @@ class Cart extends GetView<CartController> {
                                 child: Row(
                                   children: [
                                     InkWell(
-                                        onTap: () {},
-                                        child: const Icon(
-                                          Icons.remove,
-                                          color:
-                                              Color.fromARGB(255, 211, 36, 91),
-                                          size: 16,
-                                        )),
+                                      onTap: () {
+                                        cartController.removeItem();
+                                      },
+                                      child: const Icon(
+                                        Icons.remove,
+                                        color: Color.fromARGB(255, 211, 36, 91),
+                                        size: 20,
+                                      ),
+                                    ),
                                     Container(
                                       margin: const EdgeInsets.symmetric(
                                           horizontal: 3),
@@ -264,19 +269,28 @@ class Cart extends GetView<CartController> {
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(3),
                                       ),
-                                      child: Text(
-                                        (cardItem.quantity).toStringAsFixed(0),
-                                        style: const TextStyle(
-                                            color: Colors.black, fontSize: 16),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 2, right: 2),
+                                        child: Obx(() => Text(
+                                              (cartController.quantity.value)
+                                                  .toString()
+                                                  .padLeft(2, "0"),
+                                              style: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 18),
+                                            )),
                                       ),
                                     ),
                                     InkWell(
-                                        onTap: () {},
+                                        onTap: () {
+                                          cartController.addItem();
+                                        },
                                         child: const Icon(
                                           Icons.add,
                                           color:
                                               Color.fromARGB(255, 211, 36, 91),
-                                          size: 16,
+                                          size: 20,
                                         )),
                                   ],
                                 )),
