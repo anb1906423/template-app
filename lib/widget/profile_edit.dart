@@ -34,6 +34,7 @@ class ProfileEdit extends StatelessWidget {
         title: Text('cap nhat thong tin ca nhan'.tr),
         backgroundColor: Colors.pink[100],
       ),
+      backgroundColor: Colors.pink.shade50,
       body: SingleChildScrollView(
         child: Center(
           child: Container(

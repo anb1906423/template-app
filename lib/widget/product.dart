@@ -16,9 +16,9 @@ class Product extends GetView<ProductController> {
     return Scaffold(
       appBar: MyAppBar(
         title: "san pham".tr,
-        actions: [_filter(), _badge()],
+        actions: [filter(), badge()],
       ),
-      backgroundColor: Colors.grey.shade200,
+      backgroundColor: Colors.pink.shade50,
       body: Obx(
         () {
           if (controller.products.isEmpty) {
@@ -105,55 +105,55 @@ class Product extends GetView<ProductController> {
       ),
     );
   }
+}
 
-  Widget _filter() {
-    return PopupMenuButton(
-      // onSelected: {},
-      icon: const Icon(
-        Icons.more_vert,
+Widget filter() {
+  return PopupMenuButton(
+    // onSelected: {},
+    icon: const Icon(
+      Icons.more_vert,
+    ),
+    itemBuilder: (ctx) => [
+      const PopupMenuItem(
+        value: "FilterOptions.favorite",
+        child: Text('Hiện thị sản phẩm yêu thích'),
       ),
-      itemBuilder: (ctx) => [
-        const PopupMenuItem(
-          value: "FilterOptions.favorite",
-          child: Text('Hiện thị sản phẩm yêu thích'),
-        ),
-      ],
-    );
-  }
+    ],
+  );
+}
 
-  Widget _badge() {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        IconButton(
-          icon: const Icon(Icons.shopping_cart),
-          onPressed: () {
-            Get.toNamed("/cart");
-          },
-        ),
-        Positioned(
-          right: 8,
-          top: 8,
-          child: Container(
-            padding: const EdgeInsets.all(2.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              color: Colors.red,
-            ),
-            constraints: const BoxConstraints(
-              minWidth: 16,
-              minHeight: 16,
-            ),
-            child: Text(
-              "5",
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 10,
-              ),
+Widget badge() {
+  return Stack(
+    alignment: Alignment.center,
+    children: [
+      IconButton(
+        icon: const Icon(Icons.shopping_cart),
+        onPressed: () {
+          Get.toNamed("/cart");
+        },
+      ),
+      Positioned(
+        right: 8,
+        top: 8,
+        child: Container(
+          padding: const EdgeInsets.all(2.0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10.0),
+            color: Colors.red,
+          ),
+          constraints: const BoxConstraints(
+            minWidth: 16,
+            minHeight: 16,
+          ),
+          child: Text(
+            "5",
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 10,
             ),
           ),
-        )
-      ],
-    );
-  }
+        ),
+      )
+    ],
+  );
 }
