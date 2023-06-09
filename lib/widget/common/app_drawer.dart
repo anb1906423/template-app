@@ -71,6 +71,15 @@ class AppDrawer extends StatelessWidget {
             onTap: () => Get.toNamed("/setting/language"),
           ),
           const Divider(),
+          ListTile(
+            leading: const Icon(Icons.login_outlined, size: 24),
+            title: Transform.translate(
+              offset: const Offset(-16, 0),
+              child: Text('dang nhap'.tr, style: const TextStyle(fontSize: 16)),
+            ),
+            onTap: () => Get.toNamed("/login"),
+          ),
+          const Divider(),
         ],
       ),
     );

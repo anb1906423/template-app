@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:template_app/controller/register_controller.dart';
 import 'package:template_app/widget/login.dart';
 
+import '../controller/login_controller.dart';
+
 class Register extends GetView<RegisterController> {
   const Register({Key? key}) : super(key: key);
 
@@ -15,6 +17,11 @@ class Register extends GetView<RegisterController> {
 }
 
 class BodySignup extends StatelessWidget {
+  final LoginController _loginController = Get.put(LoginController());
+
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -34,10 +41,18 @@ class BodySignup extends StatelessWidget {
           RoundedField(
             hintText: "Nhập email của bạn...",
             icon: Icons.person,
-            onChanged: (value) {},
+            controller: _emailController,
+            fieldPurpose: FieldPurpose.signup,
+            onEditingComplete: () {
+              _loginController.emailValue = _emailController.text;
+            },
           ),
           RoundedPass(
-            onChanged: (value) {},
+            controller: _emailController,
+            fieldPurpose: FieldPurpose.signup,
+            // onEditingComplete: () {
+            //   _loginController.emailValue = _passwordController.text;
+            // },
           ),
           const SizedBox(height: 8),
           RoundedButton(),

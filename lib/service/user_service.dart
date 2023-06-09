@@ -22,6 +22,7 @@ class UserService extends GetxService {
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body);
         final user = UserModel.fromJson(jsonData);
+        print(user);
         return user;
       } else {
         throw Exception('Failed to login');

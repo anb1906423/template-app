@@ -31,6 +31,8 @@ class EnTranslation extends Translations {
           "chi tiet": "Detail",
           "chua cap nhat": "Not update",
           "danh sach san pham dang trong!": "Product list is empty!",
+          "dang nhap": "Login",
+
 
         }
       };

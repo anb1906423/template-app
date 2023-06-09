@@ -4,6 +4,11 @@ import 'package:template_app/controller/login_controller.dart';
 import 'package:template_app/widget/home.dart';
 import 'package:template_app/widget/register.dart';
 
+enum FieldPurpose {
+  login,
+  signup,
+}
+
 class Login extends GetView<LoginController> {
   const Login({Key? key}) : super(key: key);
 
@@ -17,6 +22,11 @@ class Login extends GetView<LoginController> {
 }
 
 class BodyWelcome extends StatelessWidget {
+  final LoginController _loginController = Get.put(LoginController());
+
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -36,13 +46,27 @@ class BodyWelcome extends StatelessWidget {
           RoundedField(
             hintText: "Nhập email của bạn...",
             icon: Icons.person,
-            onChanged: (value) {},
+            controller: _emailController,
+            fieldPurpose: FieldPurpose.login,
+            onEditingComplete: () {
+              _loginController.emailValue = _emailController.text;
+            },
           ),
           RoundedPass(
-            onChanged: (value) {},
+            controller: _passwordController,
+            fieldPurpose: FieldPurpose.login,
+            // onEditingComplete: () {
+            //   _loginController.passwordValue = _passwordController.text;
+            // },
           ),
           const SizedBox(height: 8),
-          RoundedButton(),
+          RoundedButton(
+            press: () {
+              String email = _emailController.text;
+              String password = _passwordController.text;
+              _loginController.loginUser(email, password);
+            },
+          ),
           const SizedBox(height: 10),
           AccountCheck(
             login: true,
@@ -102,22 +126,33 @@ class Background extends StatelessWidget {
 }
 
 class RoundedField extends StatelessWidget {
-  const RoundedField({
-    Key? key,
-    required this.hintText,
-    required this.icon,
-    required this.onChanged,
-  }) : super(key: key);
+  const RoundedField(
+      {Key? key,
+      required this.hintText,
+      required this.icon,
+      required this.fieldPurpose,
+      required this.controller,
+      required this.onEditingComplete})
+      : super(key: key);
 
   final String hintText;
   final IconData icon;
-  final ValueChanged<String> onChanged;
+  final FieldPurpose fieldPurpose;
+  final TextEditingController controller;
+  final void Function()? onEditingComplete;
 
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
       child: TextField(
-        onChanged: onChanged,
+        controller: controller,
+        onChanged: (value) {
+          if (fieldPurpose == FieldPurpose.login) {
+          } else if (fieldPurpose == FieldPurpose.signup) {
+            // handle signup case
+          }
+        },
+        onEditingComplete: onEditingComplete,
         decoration: InputDecoration(
           icon: Icon(
             icon,
@@ -155,17 +190,29 @@ class TextFieldContainer extends StatelessWidget {
 class RoundedPass extends StatelessWidget {
   const RoundedPass({
     Key? key,
-    required this.onChanged,
+    required this.fieldPurpose,
+    required this.controller,
+    // required this.onEditingComplete,
   }) : super(key: key);
 
-  final ValueChanged<String> onChanged;
+  final FieldPurpose fieldPurpose;
+  final TextEditingController controller;
+  // final void Function()? onEditingComplete;
 
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
       child: TextField(
         obscureText: true,
-        onChanged: onChanged,
+        controller: controller,
+        onChanged: (value) {
+          if (fieldPurpose == FieldPurpose.login) {
+            // LoginController.loginUser(value, '');
+          } else if (fieldPurpose == FieldPurpose.signup) {
+            // handle signup case
+          }
+        },
+        // onEditingComplete: onEditingComplete,
         decoration: InputDecoration(
           hintText: "Mật khẩu",
           icon: Icon(
