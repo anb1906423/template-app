@@ -4,6 +4,7 @@ import 'package:template_app/controller/product_detail_controller.dart';
 import 'package:template_app/widget/common/my_app_bar.dart';
 import 'package:template_app/widget/common/my_bottom_bar.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:template_app/widget/product.dart';
 
 class ProductDetail extends GetView<ProductDetailController> {
   const ProductDetail({Key? key}) : super(key: key);
@@ -11,7 +12,10 @@ class ProductDetail extends GetView<ProductDetailController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(title: 'chi tiet'.tr),
+      appBar: MyAppBar(
+        title: 'chi tiet'.tr,
+        actions: [filter(), badge()],
+      ),
       backgroundColor: Colors.pink.shade50,
       body: SingleChildScrollView(
         child: Column(

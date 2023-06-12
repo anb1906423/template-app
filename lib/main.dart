@@ -13,7 +13,6 @@ Future<void> main() async {
       locale: AppConfig.locale,
       initialRoute: "/home",
       getPages: RouteConfig.routes,
-      debugShowCheckedModeBanner: false,
     ),
   );
 }

@@ -273,7 +273,7 @@ class Cart extends GetView<CartController> {
                                         padding: const EdgeInsets.only(
                                             left: 2, right: 2),
                                         child: Obx(() => Text(
-                                              (cartController.quantity.value)
+                                              (cartController.numOfItem.value)
                                                   .toString()
                                                   .padLeft(2, "0"),
                                               style: const TextStyle(
