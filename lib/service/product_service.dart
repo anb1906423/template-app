@@ -14,7 +14,6 @@ class ProductService extends GetxService {
 
       if (responseData['products'] is List) {
         final List<dynamic> data = responseData['products'];
-        print(data);
         return data.map((item) => ProductModel.fromJson(item)).toList();
       } else {
         print('Invalid response data format');

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:template_app/controller/login_controller.dart';
 import 'package:template_app/widget/home.dart';
 import 'package:template_app/widget/register.dart';
+
+import '../controller/notifi_controlle.dart';
 
 enum FieldPurpose {
   login,
@@ -23,7 +26,6 @@ class Login extends GetView<LoginController> {
 
 class BodyWelcome extends StatelessWidget {
   final LoginController _loginController = Get.put(LoginController());
-
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -55,15 +57,12 @@ class BodyWelcome extends StatelessWidget {
           RoundedPass(
             controller: _passwordController,
             fieldPurpose: FieldPurpose.login,
-            // onEditingComplete: () {
-            //   _loginController.passwordValue = _passwordController.text;
-            // },
           ),
           const SizedBox(height: 8),
           RoundedButton(
             press: () {
-              String email = _emailController.text;
-              String password = _passwordController.text;
+              final email = _emailController.text;
+              final password = _passwordController.text;
               _loginController.loginUser(email, password);
             },
           ),
@@ -192,12 +191,10 @@ class RoundedPass extends StatelessWidget {
     Key? key,
     required this.fieldPurpose,
     required this.controller,
-    // required this.onEditingComplete,
   }) : super(key: key);
 
   final FieldPurpose fieldPurpose;
   final TextEditingController controller;
-  // final void Function()? onEditingComplete;
 
   @override
   Widget build(BuildContext context) {
@@ -207,12 +204,10 @@ class RoundedPass extends StatelessWidget {
         controller: controller,
         onChanged: (value) {
           if (fieldPurpose == FieldPurpose.login) {
-            // LoginController.loginUser(value, '');
           } else if (fieldPurpose == FieldPurpose.signup) {
             // handle signup case
           }
         },
-        // onEditingComplete: onEditingComplete,
         decoration: InputDecoration(
           hintText: "Mật khẩu",
           icon: Icon(

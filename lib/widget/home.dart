@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:template_app/controller/product_controller.dart';
 
 import '../service/product_service.dart';
+import '../service/user_service.dart';
 
 class Home extends GetView<ProductController> {
   const Home({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class Home extends GetView<ProductController> {
   @override
   Widget build(BuildContext context) {
     Get.put(ProductService());
-
+    
     return Scaffold(
       backgroundColor: Colors.pink.shade50,
       appBar: MyAppBar(title: "trang chu".tr),
@@ -130,7 +131,6 @@ class Home extends GetView<ProductController> {
                   ),
                 ],
               ),
-              
             ),
           ),
         ],

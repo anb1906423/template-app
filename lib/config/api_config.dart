@@ -22,4 +22,8 @@ class API {
     return '$baseUrl/user/login';
   }
 
+  static String getUserDetail(String userId) {
+    return '$baseUrl/user/detail/$userId';
+  }
+
 }
