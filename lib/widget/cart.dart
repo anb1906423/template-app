@@ -6,8 +6,8 @@ import 'package:template_app/widget/common/my_app_bar.dart';
 import 'package:template_app/widget/common/my_bottom_bar.dart';
 
 class Cart extends GetView<CartController> {
-  const Cart({Key? key}) : super(key: key);
-
+   Cart({Key? key}) : super(key: key);
+final CartController cartController = Get.find<CartController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
