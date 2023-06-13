@@ -1,53 +1,59 @@
 import 'package:get/get.dart';
 
 class UserModel {
+  String userId;
   String email;
-  String password;
-  String fullName;
-  String phoneNumber;
-  String address;
+  String? fullName;
+  String? phoneNumber;
+  String? address;
+  String token;
 
   UserModel({
+    required this.userId,
     required this.email,
-    required this.password,
-    this.fullName = '',
-    this.phoneNumber = '',
-    this.address = '',
+    required this.fullName,
+    required this.phoneNumber,
+    required this.address,
+    required this.token,
   });
 
   UserModel copyWith({
+    String? userId,
     String? email,
-    String? password,
     String? fullName,
     String? phoneNumber,
     String? address,
+    String? token,
   }) {
     return UserModel(
+      userId: userId ?? this.userId,
       email: email ?? this.email,
-      password: password ?? this.password,
       fullName: fullName ?? this.fullName,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       address: address ?? this.address,
+      token: token ?? this.token,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
+      "userId": userId,
       "email": email,
-      "password": password,
       "fullName": fullName,
       "phoneNumber": phoneNumber,
       "address": address,
+      "token": token,
     };
   }
 
   static UserModel fromJson(Map<String, dynamic> json) {
     return UserModel(
+      userId: json["userId"] ?? "",
       email: json["email"],
-      password: json["password"],
-      fullName: json["fullName"] ?? 'chua cap nhat'.tr,
-      phoneNumber: json["phoneNumber"] ?? 'chua cap nhat'.tr,
-      address: json["address"] ?? 'chua cap nhat'.tr,
+      token: json["token"] ?? '',
+      fullName: json["fullName"],
+      phoneNumber: json["phoneNumber"],
+      address: json["address"],
     );
   }
 }

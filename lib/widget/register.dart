@@ -50,9 +50,6 @@ class BodySignup extends StatelessWidget {
           RoundedPass(
             controller: _emailController,
             fieldPurpose: FieldPurpose.signup,
-            // onEditingComplete: () {
-            //   _loginController.emailValue = _passwordController.text;
-            // },
           ),
           const SizedBox(height: 8),
           RoundedButton(),

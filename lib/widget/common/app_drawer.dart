@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:template_app/service/user_service.dart';
 import 'package:template_app/util/app_util.dart';
+import 'package:template_app/util/dialog_util.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final userService = Get.put(UserService());
+
     return Drawer(
       child: Column(
         children: <Widget>[
@@ -27,7 +31,8 @@ class AppDrawer extends StatelessWidget {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       image: DecorationImage(
-                        image: NetworkImage('https://cdn5.vectorstock.com/i/1000x1000/34/29/flower-shop-logo-template-with-rose-element-vector-18503429.jpg'),
+                        image: NetworkImage(
+                            'https://cdn5.vectorstock.com/i/1000x1000/34/29/flower-shop-logo-template-with-rose-element-vector-18503429.jpg'),
                         fit: BoxFit.fill,
                       ),
                     ),
@@ -47,7 +52,8 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.update, size: 24),
             title: Transform.translate(
               offset: const Offset(-16, 0),
-              child: Text('lich su don hang'.tr, style: const TextStyle(fontSize: 16)),
+              child: Text('lich su don hang'.tr,
+                  style: const TextStyle(fontSize: 16)),
             ),
             onTap: () => Get.toNamed("/history"),
           ),
@@ -65,20 +71,40 @@ class AppDrawer extends StatelessWidget {
               children: [
                 Text(AppUtil().getLanguageName()),
                 const Padding(padding: EdgeInsets.symmetric(horizontal: 2)),
-                const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.black),
+                const Icon(Icons.arrow_forward_ios,
+                    size: 16, color: Colors.black),
               ],
             ),
             onTap: () => Get.toNamed("/setting/language"),
           ),
           const Divider(),
-          ListTile(
-            leading: const Icon(Icons.login_outlined, size: 24),
-            title: Transform.translate(
-              offset: const Offset(-16, 0),
-              child: Text('dang nhap'.tr, style: const TextStyle(fontSize: 16)),
+          if (userService.isLoggedIn())
+            ListTile(
+              leading: const Icon(Icons.logout, size: 24),
+              title: Transform.translate(
+                offset: const Offset(-16, 0),
+                child:
+                    Text('dang xuat'.tr, style: const TextStyle(fontSize: 16)),
+              ),
+              onTap: () async {
+                bool? result =
+                    await showConfirmDialog(context, "Bạn chắc chắn đăng xuất");
+                if (result == true) {
+                  Get.toNamed("/login");
+                  userService.logout();
+                }
+              },
+            )
+          else
+            ListTile(
+              leading: const Icon(Icons.login_outlined, size: 24),
+              title: Transform.translate(
+                offset: const Offset(-16, 0),
+                child:
+                    Text('dang nhap'.tr, style: const TextStyle(fontSize: 16)),
+              ),
+              onTap: () => Get.toNamed("/login"),
             ),
-            onTap: () => Get.toNamed("/login"),
-          ),
           const Divider(),
         ],
       ),

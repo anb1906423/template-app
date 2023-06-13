@@ -33,4 +33,9 @@ class API {
   static String removeFromCart(String cartId) {
     return '$baseUrl/cart/remove-from-cart/$cartId';
   }
+
+  static String getUserDetail(String userId) {
+    return '$baseUrl/user/detail/$userId';
+  }
 }
+
