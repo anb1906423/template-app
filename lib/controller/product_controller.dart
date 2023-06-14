@@ -30,6 +30,7 @@ class ProductController extends GetxController {
       print('Failed to fetch products: $e');
     }
   }
+
   RxList<ProductModel> filteredProducts = RxList<ProductModel>();
 
   void searchProduct(String keyword) {
@@ -44,5 +45,4 @@ class ProductController extends GetxController {
 
     update();
   }
-
 }

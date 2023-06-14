@@ -10,7 +10,7 @@ import '../service/product_service.dart';
 import '../service/user_service.dart';
 
 class Home extends GetView<ProductController> {
-   Home({Key? key}) : super(key: key);
+  Home({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     Get.put(ProductService());
@@ -124,10 +124,13 @@ class Home extends GetView<ProductController> {
                       ),
                     ),
                   ),
-                  Icon(
-                    Icons.search,
+                  IconButton(
+                    icon: Icon(Icons.search),
                     color: Colors.pink.shade100,
-                    size: 35,
+                    iconSize: 35,
+                    onPressed: () {
+                      FocusScope.of(context).unfocus();
+                    },
                   ),
                 ],
               ),
@@ -214,7 +217,9 @@ class Home extends GetView<ProductController> {
             children: <Widget>[
               Obx(
                 () {
-                   final productList = controller.filteredProducts.isEmpty ? controller.products : controller.filteredProducts;
+                  final productList = controller.filteredProducts.isEmpty
+                      ? controller.products
+                      : controller.filteredProducts;
                   if (productList.isEmpty) {
                     return Center(
                       child: Column(
