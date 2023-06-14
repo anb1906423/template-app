@@ -5,7 +5,7 @@ import 'package:template_app/widget/common/my_app_bar.dart';
 import 'package:template_app/widget/common/my_bottom_bar.dart';
 import 'package:get/get.dart';
 import 'package:template_app/controller/product_controller.dart';
-
+import 'package:dartz/dartz.dart' as dartz;
 import '../service/product_service.dart';
 import '../service/user_service.dart';
 
@@ -112,7 +112,7 @@ class Home extends GetView<ProductController> {
                   Expanded(
                     child: TextField(
                       onChanged: (value) {
-                        controller.searchProduct(value);
+                        controller.searchProduct(dartz.Some(value));
                       },
                       decoration: InputDecoration(
                         hintText: "Search",
