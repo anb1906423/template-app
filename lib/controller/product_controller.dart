@@ -30,4 +30,19 @@ class ProductController extends GetxController {
       print('Failed to fetch products: $e');
     }
   }
+  RxList<ProductModel> filteredProducts = RxList<ProductModel>();
+
+  void searchProduct(String keyword) {
+    if (keyword.isEmpty) {
+      filteredProducts.clear();
+    } else {
+      filteredProducts.assignAll(products
+          .where((product) =>
+              product.title.toLowerCase().contains(keyword.toLowerCase()))
+          .toList());
+    }
+
+    update();
+  }
+
 }

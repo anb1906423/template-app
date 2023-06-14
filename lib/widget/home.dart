@@ -10,12 +10,10 @@ import '../service/product_service.dart';
 import '../service/user_service.dart';
 
 class Home extends GetView<ProductController> {
-  const Home({Key? key}) : super(key: key);
-
+   Home({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     Get.put(ProductService());
-    
     return Scaffold(
       backgroundColor: Colors.pink.shade50,
       appBar: MyAppBar(title: "trang chu".tr),
@@ -113,7 +111,9 @@ class Home extends GetView<ProductController> {
                 children: <Widget>[
                   Expanded(
                     child: TextField(
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        controller.searchProduct(value);
+                      },
                       decoration: InputDecoration(
                         hintText: "Search",
                         hintStyle: TextStyle(
@@ -214,7 +214,8 @@ class Home extends GetView<ProductController> {
             children: <Widget>[
               Obx(
                 () {
-                  if (productController.products.isEmpty) {
+                   final productList = controller.filteredProducts.isEmpty ? controller.products : controller.filteredProducts;
+                  if (productList.isEmpty) {
                     return Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -230,7 +231,7 @@ class Home extends GetView<ProductController> {
                   } else
                     return Row(
                       children: [
-                        for (var product in productController.products)
+                        for (var product in productList)
                           _itemAll(
                             context: context,
                             imageUrl: product.imageUrl,

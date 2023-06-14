@@ -4,9 +4,6 @@ import 'package:template_app/controller/product_controller.dart';
 import 'package:template_app/model/product_model.dart';
 import 'package:template_app/widget/common/my_app_bar.dart';
 import 'package:template_app/widget/common/my_bottom_bar.dart';
-import '../controller/cart_controller.dart';
-import '../model/cart_item_model.dart';
-import '../service/cart_service.dart';
 import '../service/product_service.dart';
 
 class Product extends GetView<ProductController> {
@@ -51,9 +48,7 @@ class Product extends GetView<ProductController> {
       bottomNavigationBar: const MyBottomBar(index: 1),
     );
   }
-
-final CartService cartServices = Get.find<CartService>();
-  final CartController cartController = Get.put(CartController());
+  
   Widget _productGridTile({required context, required ProductModel product}) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
@@ -101,22 +96,7 @@ final CartService cartServices = Get.find<CartService>();
               Icons.shopping_cart,
             ),
             onPressed: () {
-              final item = CartItemModel(
-                  id: product.id,
-                  title: product.title,
-                  quantity: cartController.numOfItem.value,
-                  price: double.parse(product.price) * cartController.numOfItem.value,
-                  imageUrl: product.imageUrl,
-                  
-                );
-                cartController.addToCart(item);
-                Get.snackbar(
-                  'Added to cart',
-                  '${product.title} was added to your cart.',
-                  duration: Duration(seconds: 2),
-                );
-
-              print('Add item to cart');
+            print('Add item to cart');
             },
             color: Colors.pink.shade100,
           ),
