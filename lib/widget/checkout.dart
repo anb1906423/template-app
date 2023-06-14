@@ -221,7 +221,7 @@ class Checkout extends GetView<CheckoutController> {
     );
   }
 
-  Widget _CheckOutItem({required CartItemModel flower}) {
+  Widget _CheckOutItem({required CartItem flower}) {
     return Container(
       height: 90,
       decoration: BoxDecoration(
@@ -281,7 +281,7 @@ class Checkout extends GetView<CheckoutController> {
                       child: Row(
                         children: [
                           Text(
-                            (flower.price).toStringAsFixed(2),
+                            (flower.price),
                             style: const TextStyle(
                               fontSize: 15,
                               color: Colors.pinkAccent,
