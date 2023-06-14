@@ -1,7 +1,7 @@
 class CartItemModel {
   final String id;
   final String title;
-  final int quantity;
+  late final int quantity;
   final double price;
   final String imageUrl;
 

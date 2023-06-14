@@ -16,9 +16,9 @@ class RouteConfig {
   static get routes {
     return [
       GetPage(name: "/home", page: () => Home(), binding: AllBinding()),
-      GetPage(name: "/product", page: () =>  const Product(), binding: AllBinding()),
+      GetPage(name: "/product", page: () =>   Product(), binding: AllBinding()),
       GetPage(name: "/product/detail/:id", page: () => const ProductDetail(), binding: AllBinding()),
-      GetPage(name: "/cart", page: () => const Cart(), binding: AllBinding()),
+      GetPage(name: "/cart", page: () =>  Cart(), binding: AllBinding()),
       GetPage(name: "/checkout", page: () => const Checkout(), binding: AllBinding()),
       GetPage(name: "/profile", page: () => const Profile(), binding: AllBinding()),
       GetPage(name: "/profile/edit", page: () => const ProfileEdit(), binding: AllBinding()),

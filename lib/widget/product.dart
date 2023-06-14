@@ -7,8 +7,7 @@ import 'package:template_app/widget/common/my_bottom_bar.dart';
 import '../service/product_service.dart';
 
 class Product extends GetView<ProductController> {
-  const Product({Key? key}) : super(key: key);
-
+   Product({Key? key}) : super(key: key);
   @override
   Widget build(context) {
     // Dùng getX gọi lớp ProductService
@@ -49,7 +48,7 @@ class Product extends GetView<ProductController> {
       bottomNavigationBar: const MyBottomBar(index: 1),
     );
   }
-
+  
   Widget _productGridTile({required context, required ProductModel product}) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
@@ -97,7 +96,7 @@ class Product extends GetView<ProductController> {
               Icons.shopping_cart,
             ),
             onPressed: () {
-              print('Add item to cart');
+            print('Add item to cart');
             },
             color: Colors.pink.shade100,
           ),

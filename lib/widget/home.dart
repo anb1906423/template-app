@@ -5,17 +5,15 @@ import 'package:template_app/widget/common/my_app_bar.dart';
 import 'package:template_app/widget/common/my_bottom_bar.dart';
 import 'package:get/get.dart';
 import 'package:template_app/controller/product_controller.dart';
-
+import 'package:dartz/dartz.dart' as dartz;
 import '../service/product_service.dart';
 import '../service/user_service.dart';
 
 class Home extends GetView<ProductController> {
-  const Home({Key? key}) : super(key: key);
-
+  Home({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     Get.put(ProductService());
-    
     return Scaffold(
       backgroundColor: Colors.pink.shade50,
       appBar: MyAppBar(title: "trang chu".tr),
@@ -113,7 +111,9 @@ class Home extends GetView<ProductController> {
                 children: <Widget>[
                   Expanded(
                     child: TextField(
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        controller.searchProduct(dartz.Some(value));
+                      },
                       decoration: InputDecoration(
                         hintText: "Search",
                         hintStyle: TextStyle(
@@ -124,10 +124,13 @@ class Home extends GetView<ProductController> {
                       ),
                     ),
                   ),
-                  Icon(
-                    Icons.search,
+                  IconButton(
+                    icon: Icon(Icons.search),
                     color: Colors.pink.shade100,
-                    size: 35,
+                    iconSize: 35,
+                    onPressed: () {
+                      FocusScope.of(context).unfocus();
+                    },
                   ),
                 ],
               ),
@@ -214,7 +217,10 @@ class Home extends GetView<ProductController> {
             children: <Widget>[
               Obx(
                 () {
-                  if (productController.products.isEmpty) {
+                  final productList = controller.filteredProducts.isEmpty
+                      ? controller.products
+                      : controller.filteredProducts;
+                  if (productList.isEmpty) {
                     return Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -230,7 +236,7 @@ class Home extends GetView<ProductController> {
                   } else
                     return Row(
                       children: [
-                        for (var product in productController.products)
+                        for (var product in productList)
                           _itemAll(
                             context: context,
                             imageUrl: product.imageUrl,

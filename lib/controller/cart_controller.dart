@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:template_app/config/api_config.dart';
 import 'package:template_app/model/cart_item_model.dart';
 import 'package:template_app/model/product_model.dart';
 
@@ -15,7 +16,7 @@ class CartController extends GetxController {
   void addItem() {
     numOfItem.value++;
   }
-
+  
   final List<CartItemModel> carts = [
     CartItemModel(
       id: 'c1',
@@ -46,25 +47,5 @@ class CartController extends GetxController {
       imageUrl: "assets/images/Tulip.jpg",
     ),
   ];
-
-  // void addItemInCart(ProductModel product) {
-  //   final index = cartItem.indexWhere((element) => element.id == product);
-  //   if (index > 0) {
-  //     cartItem[index] = CartItemModel(
-  //         id: product.id,
-  //         title: product.title,
-  //         quantity: (numOfItem.value + cartItem[index].quantity),
-  //         price: cartItem[index].price,
-  //         imageUrl: product.imageUrl);
-  //   }else{
-  //     cartItem.add(CartItemModel(id: product.id,
-  //         title: product.title,
-  //         quantity: numOfItem.value,
-  //         price: cartItem[index].price,
-  //         imageUrl: product.imageUrl));
-  //   }
-  //   totalQuantity.value = totalQuantity.value + numOfItem.value;
-  //   numOfItem.value = 1;
-  // }
 
 }
