@@ -37,5 +37,9 @@ class API {
   static String getUserDetail(String userId) {
     return '$baseUrl/user/detail/$userId';
   }
+
+  static String updateUserProfile(String userId) {
+    return '$baseUrl/user/update/$userId';
+  }
 }
 

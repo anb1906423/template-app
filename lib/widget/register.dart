@@ -3,7 +3,11 @@ import 'package:get/get.dart';
 import 'package:template_app/controller/register_controller.dart';
 import 'package:template_app/widget/login.dart';
 
-import '../controller/login_controller.dart';
+import '../controller/user_controller.dart';
+
+final UserController _userController = Get.put(UserController());
+final TextEditingController _emailController = TextEditingController();
+final TextEditingController _passwordController = TextEditingController();
 
 class Register extends GetView<RegisterController> {
   const Register({Key? key}) : super(key: key);
@@ -17,11 +21,6 @@ class Register extends GetView<RegisterController> {
 }
 
 class BodySignup extends StatelessWidget {
-  final LoginController _loginController = Get.put(LoginController());
-
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -44,11 +43,11 @@ class BodySignup extends StatelessWidget {
             controller: _emailController,
             fieldPurpose: FieldPurpose.signup,
             onEditingComplete: () {
-              _loginController.emailValue = _emailController.text;
+              _userController.emailValue = _emailController.text;
             },
           ),
           RoundedPass(
-            controller: _emailController,
+            controller: _passwordController,
             fieldPurpose: FieldPurpose.signup,
           ),
           const SizedBox(height: 8),
@@ -120,7 +119,11 @@ class RoundedButton extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
         backgroundColor: Colors.pink.shade100,
       ),
-      onPressed: () {},
+      onPressed: () {
+        final email = _emailController.text;
+        final password = _passwordController.text;
+        _userController.userRegister(email, password);
+      },
       child: const Text(
         " Đăng Ký",
         style: TextStyle(

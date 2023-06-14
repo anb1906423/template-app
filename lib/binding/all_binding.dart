@@ -8,6 +8,8 @@ import 'package:template_app/controller/register_controller.dart';
 import 'package:template_app/controller/setting_language_controller.dart';
 
 import '../controller/login_controller.dart';
+import '../controller/notifi_controlle.dart';
+import '../controller/user_controller.dart';
 
 class AllBinding extends Bindings {
   @override
@@ -19,7 +21,8 @@ class AllBinding extends Bindings {
     Get.lazyPut(() => HistoryController());
     Get.lazyPut(() => SettingLanguageController());
     Get.lazyPut(() => LoginController());
-    Get.lazyPut(() => RegisterController());
+    Get.lazyPut(() => UserController());
+    Get.lazyPut(() => NotifiController());
 
     /// more binding here
   }

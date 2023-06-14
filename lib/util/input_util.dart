@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 class InputUtil {
   static Widget buildInput(String title, String placeholder,
-      {String value = '', bool disabled = false}) {
+      {TextEditingController? controller, bool disabled = false}) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,8 +32,8 @@ class InputUtil {
                     vertical: 12,
                     horizontal: 16), // Khoảng cách giữa nội dung và viền
               ),
-              initialValue: value,
               enabled: !disabled,
+              controller: controller,
               // Các thuộc tính khác của TextFormField
             ),
           ),

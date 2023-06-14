@@ -31,23 +31,27 @@ class LoginController extends GetxController {
         address: user.address,
       );
       // Lưu thông tin người dùng đã đăng nhập vào currentUser
-      _userService.setCurrentUser(updatedUser);
+      _userService.setCurrentUser(updatedUser, user.userId);
       _userController.getUserDetail(user.userId);
       print("login successfully");
       if (user != null) {
         // Đăng nhập thành công
         Get.toNamed("/home");
         _notifiController.showNotifi(
-            "Đăng nhập thành công", Colors.green, Colors.white);
+          "Đăng nhập thành công",
+          Colors.green,
+          Colors.white,
+        );
       }
     } catch (error) {
       // Xử lý lỗi khi đăng nhập thất bại
       print("login failed");
       print(error);
       _notifiController.showNotifi(
-          "Thông tin tài khoản hoặc mật khẩu không chính xác",
-          Colors.red,
-          Colors.white);
+        "Thông tin tài khoản hoặc mật khẩu không chính xác",
+        Colors.red,
+        Colors.white,
+      );
     }
   }
 }

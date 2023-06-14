@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:template_app/controller/user_controller.dart';
 import 'package:template_app/util/input_util.dart';
 import 'package:template_app/widget/common/my_bottom_bar.dart';
 
+import '../model/user_model.dart';
 import '../service/user_service.dart';
 
 class ProfileEdit extends StatelessWidget {
@@ -31,6 +34,15 @@ class ProfileEdit extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userService = Get.put(UserService());
+    UserController _userController = Get.find<UserController>();
+    TextEditingController fullNameController =
+        TextEditingController(text: userService.currentUser?.fullName ?? "");
+    TextEditingController phoneNumberController =
+        TextEditingController(text: userService.currentUser?.phoneNumber ?? "");
+    TextEditingController addressController =
+        TextEditingController(text: userService.currentUser?.address ?? "");
+    TextEditingController emailController =
+        TextEditingController(text: userService.currentUser?.email ?? "");
 
     Size size = MediaQuery.of(context).size;
     return Scaffold(
@@ -61,10 +73,22 @@ class ProfileEdit extends StatelessWidget {
                     padding: EdgeInsets.only(top: 24, bottom: 16),
                     child: Column(
                       children: [
-                        InputUtil.buildInput("Ho va ten", "Ho va ten", value: userService.currentUser?.fullName ?? "", disabled: false),
-                        InputUtil.buildInput("So dien thoai", "So dien thoai", value: userService.currentUser?.phoneNumber ?? "", disabled: false),
-                        InputUtil.buildInput("Email", 'Email', value: userService.currentUser?.email ?? "", disabled: true),
-                        InputUtil.buildInput("Dia chi", "Dia chi", value: userService.currentUser?.address ?? "", disabled: false),
+                        InputUtil.buildInput("Ho va ten", "Ho va ten",
+                            // value: userService.currentUser?.fullName ?? "",
+                            disabled: false,
+                            controller: fullNameController),
+                        InputUtil.buildInput("So dien thoai", "So dien thoai",
+                            // value: userService.currentUser?.phoneNumber ?? "",
+                            disabled: false,
+                            controller: phoneNumberController),
+                        InputUtil.buildInput("Email", 'Email',
+                            // value: userService.currentUser?.email ?? "",
+                            disabled: true,
+                            controller: emailController),
+                        InputUtil.buildInput("Dia chi", "Dia chi",
+                            // value: userService.currentUser?.address ?? "",
+                            disabled: false,
+                            controller: addressController),
                       ],
                     )),
                 Container(
@@ -77,10 +101,22 @@ class ProfileEdit extends StatelessWidget {
                     height: 56,
                     decoration: BoxDecoration(
                       color: Colors.pink.shade100, // Màu nền
-                      borderRadius: BorderRadius.circular(10), // Độ cong của góc
+                      borderRadius:
+                          BorderRadius.circular(10), // Độ cong của góc
                     ),
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        UserModel updatedUser = UserModel(
+                          fullName: fullNameController.text,
+                          phoneNumber: phoneNumberController.text,
+                          email: userService.currentUser?.email ?? "",
+                          address: addressController.text,
+                          userId: userService.currentUser?.userId ?? "",
+                          token: GetStorage().read('token') ??
+                              "", // Lấy giá trị token từ GetStorage
+                        );
+                        _userController.updateUserProfile(updatedUser);
+                      },
                       child: Text(
                         "luu".tr,
                         style: TextStyle(color: Colors.white, fontSize: 19),
