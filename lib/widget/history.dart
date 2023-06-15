@@ -34,7 +34,7 @@ class History extends GetView<HistoryController> {
     );
   }
 
-  Widget _OrderItemCard({required CartItemModel history}) {
+  Widget _OrderItemCard({required CartItem history}) {
     return Column(
       children: [
         Padding(

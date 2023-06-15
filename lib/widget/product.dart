@@ -4,12 +4,14 @@ import 'package:template_app/controller/product_controller.dart';
 import 'package:template_app/model/product_model.dart';
 import 'package:template_app/widget/common/my_app_bar.dart';
 import 'package:template_app/widget/common/my_bottom_bar.dart';
+import '../controller/cart_controller.dart';
 import '../service/product_service.dart';
 
 class Product extends GetView<ProductController> {
-   Product({Key? key}) : super(key: key);
+  Product({Key? key}) : super(key: key);
   @override
   Widget build(context) {
+    final cartController = Get.find<CartController>();
     // Dùng getX gọi lớp ProductService
     Get.put(ProductService());
     return Scaffold(
@@ -97,6 +99,21 @@ class Product extends GetView<ProductController> {
             ),
             onPressed: () {
             print('Add item to cart');
+              // final cart = Get.find<CartController>();
+              // cart.addToCart(productId, quantity, price, context);
+              // Get.snackbar(
+              //   'Sản phẩm được thêm vào giỏ hàng',
+              //   '',
+              //   duration: const Duration(seconds: 2),
+              //   snackPosition: SnackPosition.BOTTOM,
+              //   mainButton: TextButton(
+              //     child: const Text('Trở về'),
+              //     onPressed: () {
+              //       cart.removeSingleItem(product.id);
+              //       Get.back();
+              //     },
+              //   ),
+              // );
             },
             color: Colors.pink.shade100,
           ),

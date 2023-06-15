@@ -1,26 +1,24 @@
-class CartItemModel {
+class CartItem {
   final String id;
   final String title;
   late final int quantity;
-  final double price;
+  final String price;
   final String imageUrl;
-
-  CartItemModel({
+  CartItem({
     required this.id,
     required this.title,
     required this.quantity,
     required this.price,
     required this.imageUrl,
   });
-
-  CartItemModel copyWith({
+  CartItem copyWith({
     String? id,
     String? title,
     int? quantity,
-    double? price,
+    String? price,
     String? imageUrl,
   }) {
-    return CartItemModel(
+    return CartItem(
       id: id ?? this.id,
       title: title ?? this.title,
       quantity: quantity ?? this.quantity,
@@ -28,6 +26,7 @@ class CartItemModel {
       imageUrl: imageUrl ?? this.imageUrl,
     );
   }
+
 
   Map<String, dynamic> toJson() {
     return {
@@ -37,9 +36,9 @@ class CartItemModel {
       'imageUrl': imageUrl,
     };
   }
-
-  static CartItemModel fromJson(Map<String, dynamic> json) {
-    return CartItemModel(
+}
+  CartItem fromJson(Map<String, dynamic> json) {
+    return CartItem(
       id: json['id'],
       title: json['title'],
       quantity: json['quantity'],
@@ -47,4 +46,27 @@ class CartItemModel {
       imageUrl: json['imageUrl'],
     );
   }
+
+class Cart {
+  final String userId;
+  final List<CartItem> items;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+
+  Cart({
+    required this.userId,
+    required this.items,
+    required this.createdAt,
+    required this.updatedAt,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'user_id': userId.toString(),
+      'items': items.map((item) => item.toJson()).toList(),
+      'created_at': createdAt.toIso8601String(),
+      'updated_at': updatedAt.toIso8601String(),
+    };
+  }
 }
+

@@ -11,8 +11,11 @@ import '../controller/login_controller.dart';
 import '../controller/notifi_controlle.dart';
 import '../controller/password_controller.dart';
 import '../controller/user_controller.dart';
+import '../service/user_service.dart';
 
 class AllBinding extends Bindings {
+  final UserService _userService = Get.put(UserService());
+
   @override
   void dependencies() {
     Get.lazyPut(() => ProductController());

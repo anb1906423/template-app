@@ -23,15 +23,15 @@ class API {
   }
 
   static String addToCart() {
-    return '$baseUrl/cart/add-to-cart';
+    return '$baseUrl/cart/add';
   }
 
-  static String getCart() {
-    return '$baseUrl/cart';
+  static String getCart(String userId) {
+    return '$baseUrl/cart/detail/$userId';
   }
 
-  static String removeFromCart(String cartId) {
-    return '$baseUrl/cart/remove-from-cart/$cartId';
+  static String removeFromCart(String user_id, String product_id) {
+    return '$baseUrl/cart/delete/$user_id/$product_id';
   }
 
   static String getUserDetail(String userId) {

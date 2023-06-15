@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:template_app/controller/cart_controller.dart';
+import 'package:template_app/model/product_model.dart';
 import 'package:template_app/util/dialog_util.dart';
 import 'package:template_app/widget/common/my_app_bar.dart';
 import 'package:template_app/widget/common/my_bottom_bar.dart';
 
 class Cart extends GetView<CartController> {
-   Cart({Key? key}) : super(key: key);
-final CartController cartController = Get.find<CartController>();
+  Cart({Key? key}) : super(key: key);
+  final CartController cartController = Get.find<CartController>();
   @override
   Widget build(BuildContext context) {
+    final cartController = Get.find<CartController>();
     return Scaffold(
       appBar: MyAppBar(title: 'gio hang'.tr),
       backgroundColor: Colors.pink.shade50,
@@ -30,6 +32,14 @@ final CartController cartController = Get.find<CartController>();
   }
 
   Widget _buildCartDetails(BuildContext context) {
+  if (controller.carts.isEmpty) {
+    return Center(
+      child: Text(
+        'Chưa có sản phẩm nào trong giỏ hàng',
+        style: TextStyle(fontSize: 16),
+      ),
+    );
+  } else {
     return ListView.builder(
       itemCount: controller.carts.length,
       itemBuilder: (context, i) {
@@ -41,6 +51,7 @@ final CartController cartController = Get.find<CartController>();
       },
     );
   }
+}
 
   Widget _buildPayment(BuildContext context) {
     return Container(
@@ -52,7 +63,6 @@ final CartController cartController = Get.find<CartController>();
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           backgroundColor: Colors.pink.shade100,
-          //minimumSize: Size(double.infinity, 50)
         ),
         onPressed: () => Get.toNamed("/checkout"),
         // onPressed: () {
@@ -138,7 +148,6 @@ final CartController cartController = Get.find<CartController>();
     required productId,
     required cardItem,
   }) {
-    final cartController = Get.find<CartController>();
     return Dismissible(
       key: ValueKey(cardItem.id),
       background: Container(
@@ -252,9 +261,9 @@ final CartController cartController = Get.find<CartController>();
                                 child: Row(
                                   children: [
                                     InkWell(
-                                      onTap: () {
-                                        cartController.removeItem();
-                                      },
+                                      // onTap: () {
+                                      //   cartController.removeCartItem();
+                                      // },
                                       child: const Icon(
                                         Icons.remove,
                                         color: Color.fromARGB(255, 211, 36, 91),
@@ -269,23 +278,23 @@ final CartController cartController = Get.find<CartController>();
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(3),
                                       ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 2, right: 2),
-                                        child: Obx(() => Text(
-                                              (cartController.numOfItem.value)
-                                                  .toString()
-                                                  .padLeft(2, "0"),
-                                              style: const TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 18),
-                                            )),
-                                      ),
+                                      // child: Padding(
+                                      //   padding: const EdgeInsets.only(
+                                      //       left: 2, right: 2),
+                                      //   child: Obx(() => Text(
+                                      //         (cartController.numOfItem.value)
+                                      //             .toString()
+                                      //             .padLeft(2, "0"),
+                                      //         style: const TextStyle(
+                                      //             color: Colors.black,
+                                      //             fontSize: 18),
+                                      //       )),
+                                      // ),
                                     ),
                                     InkWell(
-                                        onTap: () {
-                                          cartController.addItem();
-                                        },
+                                        // onTap: () {
+                                        //   cartController.addToCart(productId, quantity, price, context);
+                                        // },
                                         child: const Icon(
                                           Icons.add,
                                           color:
