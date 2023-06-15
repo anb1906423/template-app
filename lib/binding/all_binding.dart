@@ -9,6 +9,7 @@ import 'package:template_app/controller/setting_language_controller.dart';
 
 import '../controller/login_controller.dart';
 import '../controller/notifi_controlle.dart';
+import '../controller/password_controller.dart';
 import '../controller/user_controller.dart';
 
 class AllBinding extends Bindings {
@@ -23,6 +24,7 @@ class AllBinding extends Bindings {
     Get.lazyPut(() => LoginController());
     Get.lazyPut(() => UserController());
     Get.lazyPut(() => NotifiController());
+    Get.lazyPut(() => PasswordController());
 
     /// more binding here
   }

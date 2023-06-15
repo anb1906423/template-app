@@ -47,7 +47,7 @@ class BodySignup extends StatelessWidget {
             },
           ),
           RoundedPass(
-            controller: _passwordController,
+            textEditingController: _passwordController,
             fieldPurpose: FieldPurpose.signup,
           ),
           const SizedBox(height: 8),
