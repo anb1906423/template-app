@@ -26,6 +26,10 @@ class API {
     return '$baseUrl/cart/add';
   }
 
+  static String updateCartItemQuantity() {
+    return '$baseUrl/cart/update';
+  }
+
   static String getCart(String userId) {
     return '$baseUrl/cart/detail/$userId';
   }

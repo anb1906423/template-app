@@ -33,6 +33,8 @@ class ViTranslation extends Translations {
           "danh sach san pham dang trong!": "Danh sách sản phẩm đang trống!",
           "dang nhap": "Đăng nhập",
           'dang xuat': "Đăng xuất",
+          'xac nhan': "Xác nhận",
+          "vui long cap nhat day du thong tin": "Vui lòng cập nhật đày đủ thông tin",
 
         },
       };

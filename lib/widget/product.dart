@@ -6,12 +6,16 @@ import 'package:template_app/widget/common/my_app_bar.dart';
 import 'package:template_app/widget/common/my_bottom_bar.dart';
 import '../controller/cart_controller.dart';
 import '../service/product_service.dart';
+import '../service/user_service.dart';
+
+CartController cartController = Get.find<CartController>();
+int totalQuantity = 0;
 
 class Product extends GetView<ProductController> {
   Product({Key? key}) : super(key: key);
+
   @override
   Widget build(context) {
-    final cartController = Get.find<CartController>();
     // Dùng getX gọi lớp ProductService
     Get.put(ProductService());
     return Scaffold(
@@ -50,8 +54,10 @@ class Product extends GetView<ProductController> {
       bottomNavigationBar: const MyBottomBar(index: 1),
     );
   }
-  
+
   Widget _productGridTile({required context, required ProductModel product}) {
+    final userService = UserService();
+
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
@@ -98,22 +104,14 @@ class Product extends GetView<ProductController> {
               Icons.shopping_cart,
             ),
             onPressed: () {
-            print('Add item to cart');
-              // final cart = Get.find<CartController>();
-              // cart.addToCart(productId, quantity, price, context);
-              // Get.snackbar(
-              //   'Sản phẩm được thêm vào giỏ hàng',
-              //   '',
-              //   duration: const Duration(seconds: 2),
-              //   snackPosition: SnackPosition.BOTTOM,
-              //   mainButton: TextButton(
-              //     child: const Text('Trở về'),
-              //     onPressed: () {
-              //       cart.removeSingleItem(product.id);
-              //       Get.back();
-              //     },
-              //   ),
-              // );
+              cartController.addToCart(
+                userService.currentUser?.userId ?? "",
+                product.id,
+                product.price,
+                product.title,
+                product.imageUrl,
+                quantity: 1,
+              );
             },
             color: Colors.pink.shade100,
           ),
@@ -162,7 +160,7 @@ Widget badge() {
             minHeight: 16,
           ),
           child: Text(
-            "5",
+            cartController.carts.length.toString(),
             textAlign: TextAlign.center,
             style: const TextStyle(
               fontSize: 10,
