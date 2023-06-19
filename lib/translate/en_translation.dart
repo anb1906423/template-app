@@ -33,6 +33,8 @@ class EnTranslation extends Translations {
           "danh sach san pham dang trong!": "Product list is empty!",
           "dang nhap": "Login",
           'dang xuat': "Log out",
+          'xac nhan': "Conform",
+          "vui long cap nhat day du thong tin": "Please fully update the information",
 
 
         }

@@ -6,11 +6,15 @@ import 'package:template_app/widget/common/my_bottom_bar.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:template_app/widget/product.dart';
 
+import '../service/user_service.dart';
+
 class ProductDetail extends GetView<ProductDetailController> {
   const ProductDetail({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final userService = UserService();
+
     return Scaffold(
       appBar: MyAppBar(
         title: 'chi tiet'.tr,
@@ -118,27 +122,16 @@ class ProductDetail extends GetView<ProductDetailController> {
                         borderRadius: BorderRadius.circular(10)),
                     backgroundColor: Colors.pink.shade100,
                   ),
-                  onPressed: () {},
-                  // onPressed: () {
-                  //   final cart = context.read<CartManager>();
-                  //   cart.addItem(product);
-                  //   ScaffoldMessenger.of(context)
-                  //     ..hideCurrentSnackBar()
-                  //     ..showSnackBar(
-                  //       SnackBar(
-                  //         content: const Text(
-                  //           'Sản phẩm được thêm vào giỏ hàng',
-                  //         ),
-                  //         duration: const Duration(seconds: 2),
-                  //         action: SnackBarAction(
-                  //           label: 'Trở lại',
-                  //           onPressed: () {
-                  //             cart.removeSingleItem(product.id!);
-                  //           },
-                  //         ),
-                  //       ),
-                  //     );
-                  // },
+                  onPressed: () {
+                    cartController.addToCart(
+                      userService.currentUser?.userId ?? "",
+                      controller.product!.id,
+                      controller.product!.price,
+                      controller.product!.title,
+                      controller.product!.imageUrl,
+                      quantity: 1,
+                    );
+                  },
                   child: const Text(
                     "Thêm giỏ hàng",
                     style: TextStyle(

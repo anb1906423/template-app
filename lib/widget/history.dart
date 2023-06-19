@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:template_app/controller/history_controller.dart';
-import 'package:template_app/model/cart_item_model.dart';
+import 'package:template_app/model/cart_model.dart';
 import 'package:template_app/util/app_util.dart';
 import 'package:template_app/widget/common/my_bottom_bar.dart';
 
@@ -34,7 +34,7 @@ class History extends GetView<HistoryController> {
     );
   }
 
-  Widget _OrderItemCard({required CartItemModel history}) {
+  Widget _OrderItemCard({required CartItem history}) {
     return Column(
       children: [
         Padding(

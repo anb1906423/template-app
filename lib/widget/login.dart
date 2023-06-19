@@ -6,6 +6,7 @@ import 'package:template_app/widget/home.dart';
 import 'package:template_app/widget/register.dart';
 
 import '../controller/notifi_controlle.dart';
+import '../controller/password_controller.dart';
 
 enum FieldPurpose {
   login,
@@ -55,7 +56,7 @@ class BodyWelcome extends StatelessWidget {
             },
           ),
           RoundedPass(
-            controller: _passwordController,
+            textEditingController: _passwordController,
             fieldPurpose: FieldPurpose.login,
           ),
           const SizedBox(height: 8),
@@ -186,38 +187,50 @@ class TextFieldContainer extends StatelessWidget {
   }
 }
 
-class RoundedPass extends StatelessWidget {
-  const RoundedPass({
+class RoundedPass extends GetWidget<PasswordController> {
+  RoundedPass({
     Key? key,
     required this.fieldPurpose,
-    required this.controller,
+    required this.textEditingController,
   }) : super(key: key);
 
   final FieldPurpose fieldPurpose;
-  final TextEditingController controller;
+  final TextEditingController textEditingController;
 
   @override
   Widget build(BuildContext context) {
-    return TextFieldContainer(
-      child: TextField(
-        obscureText: true,
-        controller: controller,
-        onChanged: (value) {
-          if (fieldPurpose == FieldPurpose.login) {
-          } else if (fieldPurpose == FieldPurpose.signup) {
-            // handle signup case
-          }
-        },
-        decoration: InputDecoration(
-          hintText: "Mật khẩu",
-          icon: Icon(
-            Icons.lock,
-            color: Colors.pink.shade50,
+    return GetX<PasswordController>(
+      builder: (controller) {
+        return TextFieldContainer(
+          child: TextField(
+            obscureText: controller.obscureText.value,
+            controller: textEditingController,
+            onChanged: (value) {
+              if (fieldPurpose == FieldPurpose.login) {
+                // handle login case
+              } else if (fieldPurpose == FieldPurpose.signup) {
+                // handle signup case
+              }
+            },
+            decoration: InputDecoration(
+              hintText: "Mật khẩu",
+              icon: Icon(
+                Icons.lock,
+                color: Colors.pink.shade50,
+              ),
+              suffixIcon: IconButton(
+                icon: controller.obscureText.value
+                    ? Icon(Icons.visibility, color: Colors.pink.shade50)
+                    : Icon(Icons.visibility_off, color: Colors.pink.shade50),
+                onPressed: () {
+                  controller.togglePasswordVisibility();
+                },
+              ),
+              border: InputBorder.none,
+            ),
           ),
-          suffixIcon: Icon(Icons.visibility, color: Colors.pink.shade50),
-          border: InputBorder.none,
-        ),
-      ),
+        );
+      },
     );
   }
 }

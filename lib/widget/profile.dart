@@ -104,13 +104,17 @@ class Profile extends StatelessWidget {
                             children: [
                               infoItemMethod(
                                 "ho va ten",
-                                _userService.currentUser?.fullName ??
-                                    "chua cap nhat".tr,
+                                _userService.currentUser?.fullName == ""
+                                    ? "chua cap nhat".tr
+                                    : _userService.currentUser?.fullName ??
+                                        "chua cap nhat".tr,
                               ),
                               infoItemMethod(
                                 "so dien thoai",
-                                _userService.currentUser?.phoneNumber ??
-                                    "chua cap nhat".tr,
+                                _userService.currentUser?.phoneNumber == ""
+                                    ? "chua cap nhat".tr
+                                    : _userService.currentUser?.phoneNumber ??
+                                        "chua cap nhat".tr,
                               ),
                               infoItemMethod(
                                 "email",
@@ -118,8 +122,10 @@ class Profile extends StatelessWidget {
                               ),
                               infoItemMethod(
                                 "dia chi",
-                                _userService.currentUser?.address ??
-                                    "chua cap nhat".tr,
+                                _userService.currentUser?.address == ""
+                                    ? "chua cap nhat".tr
+                                    : _userService.currentUser?.address ??
+                                        "chua cap nhat".tr,
                               ),
                             ],
                           ),

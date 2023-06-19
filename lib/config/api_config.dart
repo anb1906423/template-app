@@ -22,6 +22,22 @@ class API {
     return '$baseUrl/user/login';
   }
 
+  static String addToCart() {
+    return '$baseUrl/cart/add';
+  }
+
+  static String updateCartItemQuantity() {
+    return '$baseUrl/cart/update';
+  }
+
+  static String getCart(String userId) {
+    return '$baseUrl/cart/detail/$userId';
+  }
+
+  static String removeFromCart(String user_id, String product_id) {
+    return '$baseUrl/cart/delete/$user_id/$product_id';
+  }
+
   static String getUserDetail(String userId) {
     return '$baseUrl/user/detail/$userId';
   }
