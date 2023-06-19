@@ -27,6 +27,7 @@ class Checkout extends GetView<CheckoutController> {
   }
 
   Widget _checkoutBody(BuildContext context) {
+    RxBool isSuccess = false.obs;
     return Column(
       children: [
         Padding(
@@ -81,56 +82,66 @@ class Checkout extends GetView<CheckoutController> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          SizedBox(
-                            width: 200,
-                            height: 52,
-                            child: FloatingActionButton.extended(
-                              shape: const RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15.0)),
-                              ),
-                              backgroundColor: Colors.pink.shade100,
-                              foregroundColor: Colors.white,
-
-                              ///
-                              onPressed: () => showDialog<String>(
-                                context: context,
-                                builder: (BuildContext context) => AlertDialog(
-                                  content: const Text(
-                                    'Xác nhận đặt hàng',
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 20),
+                          if (isSuccess.value)
+                            SizedBox(
+                              width: 200,
+                              height: 52,
+                              child: Icon(Icons.check,
+                                  size: 30, color: Colors.green),
+                            )
+                          else
+                            SizedBox(
+                              width: 200,
+                              height: 52,
+                              child: FloatingActionButton.extended(
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15.0)),
+                                ),
+                                backgroundColor: Colors.pink.shade100,
+                                foregroundColor: Colors.white,
+                                onPressed: () => showDialog<String>(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      AlertDialog(
+                                    content: const Text(
+                                      'Xác nhận đặt hàng',
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 20),
+                                    ),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        onPressed: () {
+                                          Get.back();
+                                        },
+                                        child: const Text(
+                                          'Hủy',
+                                          style: TextStyle(
+                                              color: Colors.red, fontSize: 20),
+                                        ),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          isSuccess.value = true;
+                                          Get.back();
+                                        },
+                                        child: const Text(
+                                          'Đồng ý',
+                                          style: TextStyle(fontSize: 18),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      onPressed: () => Navigator.pop(context),
-                                      child: const Text(
-                                        'Hủy',
-                                        style: TextStyle(
-                                            color: Colors.red, fontSize: 20),
-                                      ),
-                                    ),
-                                    TextButton(
-                                      onPressed: () => {},
-                                      child: const Text(
-                                        'Đồng ý',
-                                        style: TextStyle(fontSize: 18),
-                                      ),
-                                    ),
-                                  ],
+                                ),
+                                label: Text(
+                                  'XÁC NHẬN',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
                                 ),
                               ),
-
-                              ///
-                              label: Text(
-                                'XÁC NHẬN',
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                              ),
-                            ),
-                          )
+                            )
                         ],
                       ),
                     ),

@@ -5,7 +5,7 @@ class API {
   static String getProductList() {
     return '$baseUrl/product/get-all';
   }
-
+  
   static String getOrderList() {
     return '$baseUrl/order/list';
   }
@@ -20,18 +20,6 @@ class API {
 
   static String userLogin() {
     return '$baseUrl/user/login';
-  }
-
-  static String addToCart() {
-    return '$baseUrl/cart/add-to-cart';
-  }
-
-  static String getCart() {
-    return '$baseUrl/cart';
-  }
-
-  static String removeFromCart(String cartId) {
-    return '$baseUrl/cart/remove-from-cart/$cartId';
   }
 
   static String getUserDetail(String userId) {

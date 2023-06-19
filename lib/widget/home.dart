@@ -306,25 +306,28 @@ class Home extends GetView<ProductController> {
                     ),
                   ],
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Flexible(
-                      child: Text(
-                        title,
-                        style: Theme.of(context).textTheme.button,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Flexible(
+                        child: Text(
+                          title,
+                          style: Theme.of(context).textTheme.button,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        ),
                       ),
-                    ),
-                    Text(
-                      '\$$price',
-                      style: Theme.of(context)
-                          .textTheme
-                          .button
-                          ?.copyWith(color: Colors.pink.shade100),
-                    ),
-                  ],
+                      Text(
+                        '\$$price',
+                        style: Theme.of(context)
+                            .textTheme
+                            .button
+                            ?.copyWith(color: Colors.pink.shade100),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

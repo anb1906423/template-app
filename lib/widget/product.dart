@@ -5,9 +5,10 @@ import 'package:template_app/model/product_model.dart';
 import 'package:template_app/widget/common/my_app_bar.dart';
 import 'package:template_app/widget/common/my_bottom_bar.dart';
 import '../service/product_service.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class Product extends GetView<ProductController> {
-   Product({Key? key}) : super(key: key);
+  Product({Key? key}) : super(key: key);
   @override
   Widget build(context) {
     // Dùng getX gọi lớp ProductService
@@ -26,6 +27,11 @@ class Product extends GetView<ProductController> {
                 "danh sach san pham dang trong!".tr,
                 style: TextStyle(fontSize: 18),
               ),
+              // child: LoadingAnimationWidget.twistingDots(
+              //   leftDotColor: const Color(0xFF1A1A3F),
+              //   rightDotColor: const Color(0xFFEA3799),
+              //   size: 50,
+              // ),
             );
           } else {
             return GridView.builder(
@@ -48,12 +54,13 @@ class Product extends GetView<ProductController> {
       bottomNavigationBar: const MyBottomBar(index: 1),
     );
   }
-  
-  Widget _productGridTile({required context, required ProductModel product}) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(10),
-      child: GridTile(
-        child: GestureDetector(
+}
+
+Widget _productGridTile({required context, required ProductModel product}) {
+  return ClipRRect(
+    borderRadius: BorderRadius.circular(10),
+    child: GridTile(
+      child: GestureDetector(
           child: GestureDetector(
             onTap: () => Get.toNamed("/product/detail/${product.id}"),
             child: Image.network(
@@ -62,48 +69,73 @@ class Product extends GetView<ProductController> {
             ),
           ),
         ),
-        footer: GridTileBar(
-          backgroundColor: Colors.white,
-          title: Column(
-            children: <Widget>[
-              const SizedBox(height: 5),
-              Text(
-                product.title,
-                //textAlign: TextAlign.left,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
+      // child: InkWell(
+      //   onTap: () async {
+          // Hiển thị loading animation
+          // showDialog(
+          //   context: context,
+          //   builder: (context) => Dialog(
+          //     child: LoadingAnimationWidget.threeArchedCircle(
+          //       color: Colors.pink.shade100,
+          //       size: 50,
+
+          //     ),
+          //   ),
+          // );
+          // await Future.delayed(Duration(milliseconds: 500));
+          // Chuyển trang
+          // await Navigator.of(context)
+          //     .pushNamed("/product/detail/${product.id}");
+
+          // Đóng loading animation
+          // Navigator.of(context).pop();
+      //   },
+      //   child: Image.network(
+      //     product.imageUrl,
+      //     fit: BoxFit.cover,
+      //   ),
+      // ),
+      footer: GridTileBar(
+        backgroundColor: Colors.white,
+        title: Column(
+          children: <Widget>[
+            const SizedBox(height: 5),
+            Text(
+              product.title,
+              //textAlign: TextAlign.left,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
               ),
-              const SizedBox(height: 5),
-              Align(
-                //alignment: Alignment.centerRight,
-                child: Container(
-                  child: Text(
-                    '\$${product.price}',
-                    style: const TextStyle(
-                      color: Color.fromARGB(255, 92, 92, 92),
-                      fontSize: 15,
-                    ),
+            ),
+            const SizedBox(height: 5),
+            Align(
+              //alignment: Alignment.centerRight,
+              child: Container(
+                child: Text(
+                  '\$${product.price}',
+                  style: const TextStyle(
+                    color: Color.fromARGB(255, 92, 92, 92),
+                    fontSize: 15,
                   ),
                 ),
               ),
-            ],
-          ),
-          trailing: IconButton(
-            icon: const Icon(
-              Icons.shopping_cart,
             ),
-            onPressed: () {
-            print('Add item to cart');
-            },
-            color: Colors.pink.shade100,
+          ],
+        ),
+        trailing: IconButton(
+          icon: const Icon(
+            Icons.shopping_cart,
           ),
+          onPressed: () {
+            print('Add item to cart');
+          },
+          color: Colors.pink.shade100,
         ),
       ),
-    );
-  }
+    ),
+  );
 }
 
 Widget filter() {
