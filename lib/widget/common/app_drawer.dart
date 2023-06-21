@@ -9,7 +9,7 @@ class AppDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userService = Get.put(UserService());
+    final userService = UserService();
 
     return Drawer(
       child: Column(

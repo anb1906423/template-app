@@ -33,39 +33,40 @@ class ProductController extends GetxController {
     }
   }
 
+  ProductModel? getProductById(String id) {
+    return products.firstWhereOrNull((product) => product.id == id);
+  }
+
   RxList<ProductModel> filteredProducts = RxList<ProductModel>();
 
   void searchProduct(dartz.Option<String> keywordOption) {
-  final keyword = keywordOption.getOrElse(() => '').toLowerCase();
+    final keyword = keywordOption.getOrElse(() => '').toLowerCase();
 
-  if (keyword.isEmpty) {
-    filteredProducts.assignAll(products);
-  } else {
-    filteredProducts.assignAll(
-        products.where((product) {
-      final productName = product.title.toLowerCase();
-      final removedDiacriticsKeyword =
-          removeDiacriticMarks(keyword).toLowerCase();
+    if (keyword.isEmpty) {
+      filteredProducts.assignAll(products);
+    } else {
+      filteredProducts.assignAll(products.where((product) {
+        final productName = product.title.toLowerCase();
+        final removedDiacriticsKeyword =
+            removeDiacriticMarks(keyword).toLowerCase();
 
-      return productName
-              .contains(keyword) ||
-          removeDiacriticMarks(productName)
-              .contains(removedDiacriticsKeyword);
-    }).toList());
+        return productName.contains(keyword) ||
+            removeDiacriticMarks(productName)
+                .contains(removedDiacriticsKeyword);
+      }).toList());
+    }
+
+    update();
   }
 
-  update();
-}
-
-String removeDiacriticMarks(String text) {
-  return text
-      .replaceAll(RegExp(r'[àáạảãâầấậẩẫăằắặẳẵ]'), 'a')
-      .replaceAll(RegExp('[èéẹẻẽêềếệểễ]'), 'e')
-      .replaceAll(RegExp('[ìíịỉĩ]'), 'i')
-      .replaceAll(RegExp('[òóọỏõôồốộổỗơờớợởỡ]'), 'o')
-      .replaceAll(RegExp('[ùúụủũưừứựửữ]'), 'u')
-      .replaceAll(RegExp('[ỳýỵỷỹ]'), 'y')
-      .replaceAll(RegExp('[đ]'), 'd');
-}
-
+  String removeDiacriticMarks(String text) {
+    return text
+        .replaceAll(RegExp(r'[àáạảãâầấậẩẫăằắặẳẵ]'), 'a')
+        .replaceAll(RegExp('[èéẹẻẽêềếệểễ]'), 'e')
+        .replaceAll(RegExp('[ìíịỉĩ]'), 'i')
+        .replaceAll(RegExp('[òóọỏõôồốộổỗơờớợởỡ]'), 'o')
+        .replaceAll(RegExp('[ùúụủũưừứựửữ]'), 'u')
+        .replaceAll(RegExp('[ỳýỵỷỹ]'), 'y')
+        .replaceAll(RegExp('[đ]'), 'd');
+  }
 }

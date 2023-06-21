@@ -74,7 +74,7 @@ class CartController extends GetxController {
       int quantity = cartItem.quantity;
       sum += price * quantity;
     }
-    total.value = sum.toStringAsFixed(2);
+    total.value = sum.toStringAsFixed(0);
   }
 
   Future<void> updateCartItemQuantity(
@@ -96,10 +96,6 @@ class CartController extends GetxController {
         cartItem.quantity = quantity;
         updateTotal();
       }
-
-      // saveCartsToStorage();
-      // getCartDetails();
-      // updateTotal();
     } catch (error) {
       print(error);
     }
@@ -130,6 +126,9 @@ class CartController extends GetxController {
           cartItems.map<CartItem>((item) => CartItem.fromJson(item)).toList();
       carts.assignAll(cartItemList);
       total.value = cartTotal;
+      
+      // Lỗi login chưa load giỏ hàng ngay
+      saveCartsToStorage();
     } catch (error) {
       // Handle exceptions
       print(error);

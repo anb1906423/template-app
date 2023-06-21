@@ -7,6 +7,7 @@ import 'package:template_app/widget/common/my_bottom_bar.dart';
 import '../controller/cart_controller.dart';
 import '../service/product_service.dart';
 import '../service/user_service.dart';
+import '../util/format_util.dart';
 
 CartController cartController = Get.find<CartController>();
 int totalQuantity = 0;
@@ -89,7 +90,7 @@ class Product extends GetView<ProductController> {
                 //alignment: Alignment.centerRight,
                 child: Container(
                   child: Text(
-                    '\$${product.price}',
+                    '${FormatUtils.formatPrice(product.price)} VNĐ',
                     style: const TextStyle(
                       color: Color.fromARGB(255, 92, 92, 92),
                       fontSize: 15,
@@ -150,23 +151,24 @@ Widget badge() {
         right: 8,
         top: 8,
         child: Container(
-          padding: const EdgeInsets.all(2.0),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.0),
-            color: Colors.red,
-          ),
-          constraints: const BoxConstraints(
-            minWidth: 16,
-            minHeight: 16,
-          ),
-          child: Text(
-            cartController.carts.length.toString(),
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 10,
+            padding: const EdgeInsets.all(2.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.0),
+              color: Colors.red,
             ),
-          ),
-        ),
+            constraints: const BoxConstraints(
+              minWidth: 16,
+              minHeight: 16,
+            ),
+            child: Obx(
+              () => Text(
+                cartController.carts.length.toString(),
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 10,
+                ),
+              ),
+            )),
       )
     ],
   );

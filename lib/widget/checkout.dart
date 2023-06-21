@@ -8,6 +8,7 @@ import 'package:template_app/widget/common/my_bottom_bar.dart';
 
 import '../controller/cart_controller.dart';
 import '../service/user_service.dart';
+import '../util/format_util.dart';
 
 class Checkout extends GetView<CartController> {
   const Checkout({Key? key}) : super(key: key);
@@ -34,12 +35,12 @@ class Checkout extends GetView<CartController> {
   Widget _checkoutBody(BuildContext context) {
     final _userService = Get.put(UserService());
     final totalValue = double.parse(controller.total.value);
-    final calculatedTotal = totalValue + 2;
+    final calculatedTotal = totalValue + 20000;
 
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.only(left: 12.0, right: 12.0, bottom: 10.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -95,12 +96,12 @@ class Checkout extends GetView<CartController> {
                               isShow: false),
                           const Divider(),
                           _buildRow(
-                              "Tổng tiền hàng: ${controller.total.value} \VNĐ"),
+                              "Tổng tiền hàng: ${FormatUtils.formatPrice(controller.total.value)} \VNĐ"),
                           const Divider(),
-                          _buildRow("Phí vận chuyển: 2.00 \VNĐ"),
+                          _buildRow("Phí vận chuyển: 20.000 \VNĐ"),
                           const Divider(),
                           _buildRow(
-                              "Tổng thanh toán: ${calculatedTotal.toStringAsFixed(2)} \VNĐ"),
+                              "Tổng thanh toán: ${FormatUtils.formatPrice(calculatedTotal.toString())} \VNĐ"),
                         ],
                       ),
                     ]),
@@ -289,7 +290,7 @@ class Checkout extends GetView<CartController> {
                 final CartItem cartItem = controller.carts[i];
                 return Padding(
                   padding:
-                      const EdgeInsets.only(left: 15, right: 15, bottom: 12),
+                      const EdgeInsets.only(left: 0, right: 0, bottom: 0),
                   child: CartItemCard(
                     productId: controller.carts[i].productId,
                     cardItem: controller.carts[i],

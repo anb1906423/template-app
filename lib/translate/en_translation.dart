@@ -34,9 +34,10 @@ class EnTranslation extends Translations {
           "dang nhap": "Login",
           'dang xuat': "Log out",
           'xac nhan': "Conform",
-          "vui long cap nhat day du thong tin": "Please fully update the information",
-
-
+          "vui long cap nhat day du thong tin":
+              "Please fully update the information",
+          "xin loi, san pham khong ton tai": "Sorry, product is not available",
+          "tong": "Total:",
         }
       };
 }

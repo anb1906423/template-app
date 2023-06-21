@@ -5,6 +5,10 @@ class API {
   static String getProductList() {
     return '$baseUrl/product/get-all';
   }
+
+  static String getProductDetail(String productId) {
+    return '$baseUrl/product/detail/$productId';
+  }
   
   static String getOrderList() {
     return '$baseUrl/order/list';

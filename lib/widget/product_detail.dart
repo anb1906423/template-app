@@ -6,14 +6,16 @@ import 'package:template_app/widget/common/my_bottom_bar.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:template_app/widget/product.dart';
 
+import '../controller/cart_controller.dart';
 import '../service/user_service.dart';
+import '../util/format_util.dart';
 
 class ProductDetail extends GetView<ProductDetailController> {
   const ProductDetail({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     final userService = UserService();
+    CartController cartController = Get.find<CartController>();
 
     return Scaffold(
       appBar: MyAppBar(
@@ -51,7 +53,7 @@ class ProductDetail extends GetView<ProductDetailController> {
                   const Spacer(), // Thêm Spacer widget vào đây
                   Container(
                     child: Text(
-                      controller.product?.price.toString() ?? "",
+                      "${FormatUtils.formatPrice(controller.product?.price.toString() ?? "")} VNĐ",
                       style: const TextStyle(
                         color: Color.fromARGB(255, 92, 92, 92),
                         fontSize: 20,

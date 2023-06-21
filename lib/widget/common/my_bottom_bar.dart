@@ -27,10 +27,10 @@ class MyBottomBar extends StatelessWidget {
         Get.offAllNamed("/home");
         break;
       case 1:
-        Get.toNamed("/product");
+        Get.offAllNamed("/product");
         break;
       case 2:
-        Get.toNamed("/cart");
+        Get.offAllNamed("/cart");
         break;
       case 3:
         Get.toNamed("/profile");

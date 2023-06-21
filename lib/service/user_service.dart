@@ -11,6 +11,7 @@ import '../model/user_model.dart';
 
 class UserService extends GetxService {
   final NotifiController _notifiController = Get.put(NotifiController());
+  final GetStorage _storage = GetStorage();
 
   final box = GetStorage();
   UserModel? currentUser;
@@ -120,6 +121,7 @@ class UserService extends GetxService {
     box.remove('token');
     deleteUserData();
     currentUser = null;
+    _storage.remove('carts');
   }
 
   void setCurrentUser(UserModel user, String userId) {
