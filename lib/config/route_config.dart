@@ -9,6 +9,7 @@ import 'package:template_app/widget/product_detail.dart';
 import 'package:template_app/widget/profile.dart';
 import 'package:template_app/widget/profile_edit.dart';
 import 'package:template_app/widget/setting_language.dart';
+import '../widget/favorite.dart';
 import '../widget/login.dart';
 import '../widget/register.dart';
 
@@ -17,7 +18,7 @@ class RouteConfig {
     return [
       GetPage(name: "/home", page: () => Home(), binding: AllBinding()),
       GetPage(name: "/product", page: () =>   Product(), binding: AllBinding()),
-      GetPage(name: "/product/detail/:id", page: () => const ProductDetail(), binding: AllBinding()),
+      GetPage(name: "/product/detail/:id", page: () =>  ProductDetail(), binding: AllBinding()),
       GetPage(name: "/cart", page: () =>  Cart(), binding: AllBinding()),
       GetPage(name: "/checkout", page: () => const Checkout(), binding: AllBinding()),
       GetPage(name: "/profile", page: () => const Profile(), binding: AllBinding()),
@@ -26,6 +27,7 @@ class RouteConfig {
       GetPage(name: "/setting/language", page: () => const SettingLanguage(), binding: AllBinding()),
       GetPage(name: "/register", page: () => const Register(), binding: AllBinding()),
       GetPage(name: "/login", page: () => Login(), binding: AllBinding()),
+      GetPage(name: "/favorite", page: () => Favorite(), binding: AllBinding()),
     ];
   }
 }

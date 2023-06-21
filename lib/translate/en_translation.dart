@@ -38,6 +38,7 @@ class EnTranslation extends Translations {
               "Please fully update the information",
           "xin loi, san pham khong ton tai": "Sorry, product is not available",
           "tong": "Total:",
+          "san pham yeu thich" : "Favorite product",
         }
       };
 }

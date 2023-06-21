@@ -30,4 +30,5 @@ class ProductDetailController extends GetxController {
       throw "Không tìm thấy sản phẩm";
     }
   }
+  void toggleFavorite() {}
 }

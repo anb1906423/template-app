@@ -37,7 +37,7 @@ class ViTranslation extends Translations {
           "vui long cap nhat day du thong tin": "Vui lòng cập nhật đày đủ thông tin",
           "xin loi, san pham khong ton tai": "Xin lỗi, sản phẩm không tồn tại",
           "tong": "Tổng:",
-
+          "san pham yeu thich" : "Sản phẩm yêu thích",
         },
       };
 }

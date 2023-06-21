@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:template_app/controller/product_detail_controller.dart';
@@ -7,16 +8,22 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:template_app/widget/product.dart';
 
 import '../controller/cart_controller.dart';
+import '../controller/favorite_controller.dart';
 import '../service/user_service.dart';
 import '../util/format_util.dart';
 
 class ProductDetail extends GetView<ProductDetailController> {
   const ProductDetail({Key? key}) : super(key: key);
+ 
   @override
   Widget build(BuildContext context) {
-    final userService = UserService();
+    final _userService = UserService();
     CartController cartController = Get.find<CartController>();
-
+    final FavoriteController favoriteController = Get.find<FavoriteController>();
+    bool isFavorite = favoriteController.isProductFavorite(
+        _userService.currentUser?.userId ?? "", controller.product!.id);
+    print(isFavorite);
+    
     return Scaffold(
       appBar: MyAppBar(
         title: 'chi tiet'.tr,
@@ -63,17 +70,27 @@ class ProductDetail extends GetView<ProductDetailController> {
                 ],
               ),
             ),
-            IconButton(
-              icon: Icon(
-                controller.product!.isFavorite
-                    ? Icons.favorite
-                    : Icons.favorite_border,
-              ),
-              color: Colors.red,
-              onPressed: () {
-                // controller.product!.isFavorite = !controller.product!.isFavorite;
-              },
-            ),
+            Obx(() {
+              isFavorite = favoriteController.isProductFavorite(
+                  _userService.currentUser?.userId ?? "",
+                  controller.product!.id);
+              return IconButton(
+                icon: Icon(
+                  isFavorite ? Icons.favorite : Icons.favorite_border,
+                ),
+                color: Colors.red,
+                onPressed: () {
+                  String userId = _userService.currentUser?.userId ?? "";
+                  String productId = controller.product!.id;
+
+                  if (isFavorite) {
+                    favoriteController.removeFavorites(userId, productId);
+                  } else {
+                    favoriteController.addToFavorites(userId, productId);
+                  }
+                },
+              );
+            }),
             Container(
               margin: const EdgeInsets.only(top: 20, bottom: 20),
               padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -126,7 +143,7 @@ class ProductDetail extends GetView<ProductDetailController> {
                   ),
                   onPressed: () {
                     cartController.addToCart(
-                      userService.currentUser?.userId ?? "",
+                      _userService.currentUser?.userId ?? "",
                       controller.product!.id,
                       controller.product!.price,
                       controller.product!.title,

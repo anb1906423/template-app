@@ -70,6 +70,75 @@ class Cart extends GetView<CartController> {
                 },
                 isContainerVisible: true,
               );
+              if (cartItem.quantity > 0) {
+                return Dismissible(
+                  key: ValueKey(cartItem.productId),
+                  direction: DismissDirection.endToStart,
+                  confirmDismiss: (direction) async {
+                    final bool shouldDelete = await showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text("Xóa sản phẩm?"),
+                          content: Text(
+                              "Bạn có chắc muốn xóa sản phẩm này khỏi giỏ hàng?"),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () => Navigator.of(context).pop(false),
+                              child: Text("Hủy bỏ"),
+                            ),
+                            TextButton(
+                              onPressed: () => Navigator.of(context).pop(true),
+                              child: Text("Xóa"),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                    return shouldDelete;
+                  },
+                  onDismissed: (direction) {
+                    controller.removeCartItem(
+                      cartItem.productId,
+                    );
+                  },
+                  background: Container(
+                    color: Colors.red,
+                    child: const Padding(
+                      padding: EdgeInsets.only(right: 16.0),
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Icon(
+                          Icons.delete,
+                          color: Colors.white,
+                          size: 30,
+                        ),
+                      ),
+                    ),
+                  ),
+                  child: CartItemCard(
+                    productId: cartItem.productId,
+                    cardItem: cartItem,
+                    onDecreaseQuantity: (newQuantity) {
+                      controller.updateCartItemQuantity(
+                        _userService.currentUser?.userId ?? "",
+                        cartItem.productId,
+                        newQuantity,
+                      );
+                    },
+                    onIncreaseQuantity: (newQuantity) {
+                      controller.updateCartItemQuantity(
+                        _userService.currentUser?.userId ?? "",
+                        cartItem.productId,
+                        newQuantity,
+                      );
+                    },
+                    isContainerVisible: true,
+                  ),
+                );
+              } else {
+                return SizedBox.shrink();
+              }
             },
           ));
     }
@@ -217,7 +286,7 @@ Widget CartItemCard({
                               ),
                             ),
                           ],
-                        ),
+                        ),                       
                         Visibility(
                           visible: isContainerVisible,
                           child: Container(

@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:template_app/controller/cart_controller.dart';
+import 'package:template_app/controller/favorite_controller.dart';
 import 'package:template_app/controller/history_controller.dart';
 import 'package:template_app/controller/product_detail_controller.dart';
 import 'package:template_app/controller/product_controller.dart';
@@ -25,6 +26,7 @@ class AllBinding extends Bindings {
     Get.lazyPut(() => NotifiController());
     Get.lazyPut(() => PasswordController());
     Get.lazyPut(() => CartController());
+    Get.lazyPut(() => FavoriteController());
 
     /// more binding here
   }
