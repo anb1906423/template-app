@@ -17,4 +17,6 @@ class ProductDetailController extends GetxController {
     }
     product = productController.products.firstWhere((element) => element.id == id);
   }
+
+  void toggleFavorite() {}
 }

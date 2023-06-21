@@ -35,7 +35,7 @@ class EnTranslation extends Translations {
           'dang xuat': "Log out",
           'xac nhan': "Conform",
           "vui long cap nhat day du thong tin": "Please fully update the information",
-
+          "san pham yeu thich" : "Favorite product",
 
         }
       };

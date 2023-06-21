@@ -4,6 +4,7 @@ import 'package:template_app/controller/product_controller.dart';
 import 'package:template_app/model/product_model.dart';
 import 'package:template_app/widget/common/my_app_bar.dart';
 import 'package:template_app/widget/common/my_bottom_bar.dart';
+import 'package:template_app/widget/favorite.dart';
 import '../controller/cart_controller.dart';
 import '../service/product_service.dart';
 import '../service/user_service.dart';
@@ -119,18 +120,25 @@ class Product extends GetView<ProductController> {
       ),
     );
   }
+
+  // static fromJson(data) {}
 }
 
 Widget filter() {
   return PopupMenuButton(
-    // onSelected: {},
+    onSelected: (value) {
+      if (value == "FilterOptions.favorite") {
+        // Chuyển đến trang khác sử dụng GetX
+        Get.toNamed('/favorite');
+      }
+    },
     icon: const Icon(
       Icons.more_vert,
     ),
     itemBuilder: (ctx) => [
       const PopupMenuItem(
         value: "FilterOptions.favorite",
-        child: Text('Hiện thị sản phẩm yêu thích'),
+        child: Text('Hiển thị sản phẩm yêu thích'),
       ),
     ],
   );

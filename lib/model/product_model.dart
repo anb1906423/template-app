@@ -5,7 +5,7 @@ class ProductModel {
   final String description;
   final String price;
   final String imageUrl;
-  final bool isFavorite;
+  late final bool isFavorite;
 
   ProductModel({
     required this.id,

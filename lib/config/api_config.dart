@@ -22,7 +22,7 @@ class API {
     return '$baseUrl/user/login';
   }
 
-  static String addToCart() {
+  static String addToCart(String userId, String productId) {
     return '$baseUrl/cart/add';
   }
 
@@ -44,6 +44,18 @@ class API {
 
   static String updateUserProfile(String userId) {
     return '$baseUrl/user/update/$userId';
+  }
+
+  static String getFavoritesByUserId(String userId) {
+    return '$baseUrl/favorite/user/$userId';
+  }
+
+  static String addToFavorites(String userId, String productId) {
+    return '$baseUrl/favorite/add/$productId/$userId';
+  }
+
+  static String removeFavorite(String userId, String productId) {
+    return '$baseUrl/favorite/remove/$productId/$userId';
   }
 }
 
