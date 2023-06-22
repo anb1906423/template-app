@@ -51,25 +51,7 @@ class Cart extends GetView<CartController> {
             itemCount: controller.carts.length,
             itemBuilder: (context, i) {
               final CartItem cartItem = controller.carts[i];
-              return CartItemCard(
-                productId: cartItem.productId,
-                cardItem: cartItem,
-                onDecreaseQuantity: (newQuantity) {
-                  controller.updateCartItemQuantity(
-                    _userService.currentUser?.userId ?? "",
-                    cartItem.productId,
-                    newQuantity,
-                  );
-                },
-                onIncreaseQuantity: (newQuantity) {
-                  controller.updateCartItemQuantity(
-                    _userService.currentUser?.userId ?? "",
-                    cartItem.productId,
-                    newQuantity,
-                  );
-                },
-                isContainerVisible: true,
-              );
+
               if (cartItem.quantity > 0) {
                 return Dismissible(
                   key: ValueKey(cartItem.productId),
@@ -286,7 +268,7 @@ Widget CartItemCard({
                               ),
                             ),
                           ],
-                        ),                       
+                        ),
                         Visibility(
                           visible: isContainerVisible,
                           child: Container(
