@@ -286,7 +286,7 @@ Widget CartItemCard({
                               ),
                             ),
                           ],
-                        ),                       
+                        ),
                         Visibility(
                           visible: isContainerVisible,
                           child: Container(
