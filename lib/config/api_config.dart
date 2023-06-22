@@ -50,6 +50,18 @@ class API {
     return '$baseUrl/user/update/$userId';
   }
 
+   static String createOrder() {
+    return '$baseUrl/order/create';
+  }
+
+  static String getOrdersByUserId(String userId) {
+    return '$baseUrl/order/list/$userId';
+  }
+
+   static String getOrderDetails(String orderId) {
+    return '$baseUrl/order/detail/$orderId';
+  }
+
   static String getFavoritesByUserId(String userId) {
     return '$baseUrl/favorite/user/$userId';
   }

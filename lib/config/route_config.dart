@@ -23,7 +23,7 @@ class RouteConfig {
       GetPage(name: "/checkout", page: () => const Checkout(), binding: AllBinding()),
       GetPage(name: "/profile", page: () => const Profile(), binding: AllBinding()),
       GetPage(name: "/profile/edit", page: () => const ProfileEdit(), binding: AllBinding()),
-      GetPage(name: "/history", page: () => const History(), binding: AllBinding()),
+      GetPage(name: "/history", page: () =>  History(), binding: AllBinding()),
       GetPage(name: "/setting/language", page: () => const SettingLanguage(), binding: AllBinding()),
       GetPage(name: "/register", page: () => const Register(), binding: AllBinding()),
       GetPage(name: "/login", page: () => Login(), binding: AllBinding()),

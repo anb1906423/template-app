@@ -31,4 +31,5 @@ class AppUtil {
   static String formatDate({required DateTime time}) {
     return DateFormat('dd/MM/yyyy hh:mm').format(time);
   }
+
 }

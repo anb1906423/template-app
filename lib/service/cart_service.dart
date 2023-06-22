@@ -29,6 +29,7 @@ class CartService extends GetxService {
       );
 
       final responseData = json.decode(response.body);
+       
       if (response.statusCode == 200) {
         _notifiController.showNotifi(
           "${title} đã được thêm vào giỏ hàng",

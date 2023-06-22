@@ -6,6 +6,7 @@ import 'package:template_app/widget/common/my_bottom_bar.dart';
 import 'package:get/get.dart';
 import 'package:template_app/controller/product_controller.dart';
 import 'package:dartz/dartz.dart' as dartz;
+import '../controller/Order_controller.dart';
 import '../controller/cart_controller.dart';
 import '../service/product_service.dart';
 import '../service/user_service.dart';
@@ -13,7 +14,7 @@ import '../util/format_util.dart';
 
 class Home extends GetView<ProductController> {
   CartController cartController = Get.find<CartController>();
-
+  
   Home({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
