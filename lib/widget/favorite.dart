@@ -6,6 +6,7 @@ import 'package:template_app/widget/product.dart';
 import '../controller/favorite_controller.dart';
 import '../model/product_model.dart';
 import '../service/user_service.dart';
+import '../util/format_util.dart';
 
 class Favorite extends GetView<FavoriteController> {
   Favorite({Key? key}) : super(key: key);
@@ -91,7 +92,7 @@ class Favorite extends GetView<FavoriteController> {
                 //alignment: Alignment.centerRight,
                 child: Container(
                   child: Text(
-                    '\$${favorite.price}',
+                    '${FormatUtils.formatPrice(favorite.price)} VNĐ',
                     style: const TextStyle(
                       color: Color.fromARGB(255, 92, 92, 92),
                       fontSize: 15,

@@ -12,10 +12,22 @@ class MyBottomBar extends StatelessWidget {
       currentIndex: index,
       // fixedColor: Colors.black,
       items: [
-        BottomNavigationBarItem(icon: const Icon(Icons.home), label: "trang chu".tr, backgroundColor: Colors.pink[100]),
-        BottomNavigationBarItem(icon: const Icon(Icons.local_florist_rounded), label: "san pham".tr, backgroundColor: Colors.pink[100]),
-        BottomNavigationBarItem(icon: const Icon(Icons.shopping_cart), label: "gio hang".tr, backgroundColor: Colors.pink[100]),
-        BottomNavigationBarItem(icon: const Icon(Icons.person), label: "tai khoan".tr, backgroundColor: Colors.pink[100]),
+        BottomNavigationBarItem(
+            icon: const Icon(Icons.home),
+            label: "trang chu".tr,
+            backgroundColor: Colors.pink[100]),
+        BottomNavigationBarItem(
+            icon: const Icon(Icons.local_florist_rounded),
+            label: "san pham".tr,
+            backgroundColor: Colors.pink[100]),
+        BottomNavigationBarItem(
+            icon: const Icon(Icons.shopping_cart),
+            label: "gio hang".tr,
+            backgroundColor: Colors.pink[100]),
+        BottomNavigationBarItem(
+            icon: const Icon(Icons.person),
+            label: "tai khoan".tr,
+            backgroundColor: Colors.pink[100]),
       ],
       onTap: (int index) => _onTapItem(index: index),
     );
