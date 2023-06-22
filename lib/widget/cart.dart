@@ -6,15 +6,17 @@ import 'package:template_app/util/dialog_util.dart';
 import 'package:template_app/widget/common/my_app_bar.dart';
 import 'package:template_app/widget/common/my_bottom_bar.dart';
 
+import '../controller/product_controller.dart';
 import '../model/cart_model.dart';
 import '../service/user_service.dart';
+import '../util/format_util.dart';
 
 class Cart extends GetView<CartController> {
   Cart({Key? key}) : super(key: key);
+  final cartController = Get.find<CartController>();
+
   @override
   Widget build(BuildContext context) {
-    final cartController = Get.find<CartController>();
-
     return Scaffold(
       appBar: MyAppBar(title: 'gio hang'.tr),
       backgroundColor: Colors.pink.shade50,
@@ -49,6 +51,7 @@ class Cart extends GetView<CartController> {
             itemCount: controller.carts.length,
             itemBuilder: (context, i) {
               final CartItem cartItem = controller.carts[i];
+
               if (cartItem.quantity > 0) {
                 return Dismissible(
                   key: ValueKey(cartItem.productId),
@@ -160,15 +163,16 @@ class Cart extends GetView<CartController> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            const Text(
-              'Tổng:',
+            Text(
+              'tong'.tr,
               style: TextStyle(fontSize: 20),
             ),
             const Spacer(),
             Obx(
               () => Chip(
                 label: Text(
-                  '\$${controller.total.value}',
+                  // "${controller.total.value} VNĐ",
+                  '${FormatUtils.formatPrice(controller.total.value)} VNĐ',
                   style: TextStyle(
                     color: Theme.of(context).primaryTextTheme.titleLarge?.color,
                     fontSize: 16,
@@ -245,22 +249,26 @@ Widget CartItemCard({
                   Container(
                     margin: const EdgeInsets.only(top: 10),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          cardItem.price,
-                          style: const TextStyle(
-                            fontSize: 15,
-                            color: Colors.pinkAccent,
-                          ),
+                        Row(
+                          children: [
+                            Text(
+                              FormatUtils.formatPrice(cardItem.price),
+                              style: const TextStyle(
+                                fontSize: 15,
+                                color: Colors.pinkAccent,
+                              ),
+                            ),
+                            const Text(
+                              " \VNĐ",
+                              style: TextStyle(
+                                color: Colors.pinkAccent,
+                                fontSize: 15,
+                              ),
+                            ),
+                          ],
                         ),
-                        const Text(
-                          " \$",
-                          style: TextStyle(
-                            color: Colors.pinkAccent,
-                            fontSize: 15,
-                          ),
-                        ),
-                        const SizedBox(width: 100),
                         Visibility(
                           visible: isContainerVisible,
                           child: Container(

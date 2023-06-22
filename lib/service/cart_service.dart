@@ -14,7 +14,7 @@ class CartService extends GetxService {
       {int quantity = 1}) async {
     try {
       final response = await http.post(
-        Uri.parse(API.addToCart()),
+        Uri.parse(API.addToCart(userId, productId)),
         body: json.encode({
           'user_id': userId,
           'product_id': productId,

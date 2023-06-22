@@ -5,6 +5,10 @@ class API {
   static String getProductList() {
     return '$baseUrl/product/get-all';
   }
+
+  static String getProductDetail(String productId) {
+    return '$baseUrl/product/detail/$productId';
+  }
   
   static String getOrderList() {
     return '$baseUrl/order/list';
@@ -22,7 +26,7 @@ class API {
     return '$baseUrl/user/login';
   }
 
-  static String addToCart() {
+  static String addToCart(String userId, String productId) {
     return '$baseUrl/cart/add';
   }
 
@@ -58,5 +62,16 @@ class API {
     return '$baseUrl/order/detail/$orderId';
   }
 
+  static String getFavoritesByUserId(String userId) {
+    return '$baseUrl/favorite/user/$userId';
+  }
+
+  static String addToFavorites(String userId, String productId) {
+    return '$baseUrl/favorite/add/$productId/$userId';
+  }
+
+  static String removeFavorite(String userId, String productId) {
+    return '$baseUrl/favorite/remove/$productId/$userId';
+  }
 }
 

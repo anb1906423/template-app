@@ -10,6 +10,7 @@ import '../controller/Order_controller.dart';
 import '../controller/cart_controller.dart';
 import '../service/product_service.dart';
 import '../service/user_service.dart';
+import '../util/format_util.dart';
 
 class Home extends GetView<ProductController> {
   CartController cartController = Get.find<CartController>();
@@ -311,7 +312,7 @@ class Home extends GetView<ProductController> {
                   ],
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(4.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -323,12 +324,15 @@ class Home extends GetView<ProductController> {
                           maxLines: 1,
                         ),
                       ),
-                      Text(
-                        '\$$price',
-                        style: Theme.of(context)
-                            .textTheme
-                            .button
-                            ?.copyWith(color: Colors.pink.shade100),
+                      Padding(
+                        padding: EdgeInsets.only(left: 4),
+                        child: Text(
+                          FormatUtils.formatPrice(price),
+                          style: Theme.of(context)
+                              .textTheme
+                              .button
+                              ?.copyWith(color: Colors.pink.shade100),
+                        ),
                       ),
                     ],
                   ),
@@ -349,27 +353,37 @@ class Home extends GetView<ProductController> {
           _itemPopular(
             context: context,
             image: "assets/images/hoahong.jpg",
-            press: () {},
+            press: () {
+              Get.toNamed("/product");
+            },
           ),
           _itemPopular(
             context: context,
             image: "assets/images/cuchoami.jpg",
-            press: () {},
+            press: () {
+              Get.toNamed("/product");
+            },
           ),
           _itemPopular(
             context: context,
             image: "assets/images/huongduong.jpg",
-            press: () {},
+            press: () {
+              Get.toNamed("/product");
+            },
           ),
           _itemPopular(
             context: context,
             image: "assets/images/hoaanhtuc.jpg",
-            press: () {},
+            press: () {
+              Get.toNamed("/product");
+            },
           ),
           _itemPopular(
             context: context,
             image: "assets/images/camtucau.jpg",
-            press: () {},
+            press: () {
+              Get.toNamed("/product");
+            },
           ),
         ],
       ),
