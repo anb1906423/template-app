@@ -6,6 +6,7 @@ import 'package:template_app/widget/common/my_app_bar.dart';
 import 'package:template_app/widget/common/my_bottom_bar.dart';
 import 'package:template_app/widget/favorite.dart';
 import '../controller/cart_controller.dart';
+import '../controller/favorite_controller.dart';
 import '../service/product_service.dart';
 import '../service/user_service.dart';
 import '../util/format_util.dart';
@@ -15,9 +16,16 @@ int totalQuantity = 0;
 
 class Product extends GetView<ProductController> {
   Product({Key? key}) : super(key: key);
+  final _userService = UserService();
+  final FavoriteController favoriteController = Get.find();
+  
 
   @override
   Widget build(context) {
+
+    favoriteController
+        .getFavoritesByUserId(_userService.currentUser?.userId ?? "");
+
     // Dùng getX gọi lớp ProductService
     Get.put(ProductService());
     return Scaffold(

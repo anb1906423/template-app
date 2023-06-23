@@ -9,6 +9,8 @@ import '../widget/product.dart';
 import '../model/favorite_model.dart';
 
 class FavoriteService extends GetxService {
+
+
   Future<List<FavoriteModel>> getFavoritesByUserId(String userId) async {
     // Gửi yêu cầu HTTP để lấy danh sách yêu thích của người dùng theo ID
     final response =
@@ -79,5 +81,6 @@ class FavoriteService extends GetxService {
   //     throw Exception('Failed to remove favorite');
   //   }
   // }
+
 
 }

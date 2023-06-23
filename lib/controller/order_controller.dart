@@ -20,7 +20,7 @@ class OrderController extends GetxController {
     try {
       final responseData = await OrderService.getOrdersByUserId(
           userService.currentUser?.userId ?? "");
-           orders.assignAll(responseData);
+          orders.assignAll(responseData);
     } catch (error) {
       // Handle exceptions
       print(error);

@@ -55,8 +55,6 @@ class FavoriteController extends GetxController {
   }
 
   bool isProductFavorite(String userId, String productId) {
-    // Lấy danh sách yêu thích của người dùng
-
     // Kiểm tra xem sản phẩm có trong danh sách yêu thích hay không
     return favorites.any((product) => product.productId == productId);
   }
