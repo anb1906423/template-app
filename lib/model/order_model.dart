@@ -71,7 +71,7 @@ class OrderItem {
       quantity: json['quantity'] as int,
       price: json['price'].toString(),
       tempValue: json['tempValue'].toString(),
-      productName: json['productName'] as String,
+      productName: json['title'] as String,
     );
   }
 

@@ -4,33 +4,54 @@ import 'package:template_app/model/order_model.dart';
 import 'dart:convert';
 
 import '../config/api_config.dart';
+import '../model/cart_model.dart';
 
 class OrderService extends GetxService {
-  static Future<void> createOrder(String userId, String productId, String price,
-      String productName, int quantity, String tempValue) async {
+  Future<Map<String, dynamic>> createOrder({
+    required String userId,
+    required List<CartItem> items,
+    required String phoneNumber,
+    required String address,
+    required String email,
+    required String customerName,
+  }) async {
     try {
+      final itemData = items.map((item) {
+        return {
+          'product_id': item.productId,
+          'price': item.price,
+          'title': item.title,
+          'imageUrl': item.imageUrl,
+          'quantity': item.quantity,
+        };
+      }).toList();
+
+      final orderData = {
+        'user_id': userId,
+        'items': itemData,
+        'phoneNumber': phoneNumber,
+        'address': address,
+        'email': email,
+        'customerName': customerName,
+      };
       final response = await http.post(
         Uri.parse(API.createOrder()),
-        body: json.encode({
-          'user_id': userId,
-          'product_id': productId,
-          'quantity': quantity,
-          'price': price,
-          "productName": productName,
-          "tempValue": tempValue,
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        body: json.encode(orderData),
+        headers: {'Content-Type': 'application/json'},
       );
+
       final responseData = json.decode(response.body);
 
       if (response.statusCode == 200) {
-        print(responseData['data']);
+        return {
+          'message': 'Order created',
+          'order': responseData['order'],
+        };
       } else {
         throw Exception(responseData['error']);
       }
     } catch (error) {
+      print(error);
       throw Exception('Error occurred while creating order');
     }
   }
@@ -39,8 +60,6 @@ class OrderService extends GetxService {
     try {
       final response = await http.get(Uri.parse(API.getOrdersByUserId(userId)));
       final responseData = jsonDecode(response.body);
-      print("code: ${response.statusCode}");
-      print(responseData);
       if (response.statusCode == 200) {
         // final Map<String, dynamic> jsonResponse =
         //     json.decode(response.body) as Map<String, dynamic>;
@@ -54,22 +73,6 @@ class OrderService extends GetxService {
       }
     } catch (error) {
       throw Exception('$error');
-    }
-  }
-
-  static Future<void> fetchOrderDetails(String orderId) async {
-    try {
-      final response = await http.get(Uri.parse(API.getOrderDetails(orderId)));
-      final responseData = json.decode(response.body);
-      print("code: ${response.statusCode}");
-      print(responseData);
-      if (response.statusCode == 200) {
-        return responseData;
-      } else {
-        throw Exception(responseData['error']);
-      }
-    } catch (error) {
-      throw Exception('Error occurred while fetching order details');
     }
   }
 }

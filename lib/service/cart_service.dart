@@ -29,7 +29,7 @@ class CartService extends GetxService {
       );
 
       final responseData = json.decode(response.body);
-       
+
       if (response.statusCode == 200) {
         _notifiController.showNotifi(
           "${title} đã được thêm vào giỏ hàng",
@@ -92,12 +92,25 @@ class CartService extends GetxService {
       if (response.statusCode == 200) {
         // return responseData['cart'] as Map<String, dynamic>;
         return responseData;
-
       } else {
         throw Exception(responseData['error']);
       }
     } catch (error) {
       throw Exception('Error occurred while fetching cart details');
+    }
+  }
+
+  static Future<void> emptyCart(String user_id) async {
+    try {
+      final response = await http.delete(Uri.parse(API.emptyCart(user_id)));
+      final responseData = json.decode(response.body);
+      if (response.statusCode == 200) {
+        print(responseData['message']);
+      } else {
+        throw Exception(responseData['error']);
+      }
+    } catch (error) {
+      throw Exception('Error occurred while empty cart');
     }
   }
 }
