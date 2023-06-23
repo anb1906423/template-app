@@ -134,4 +134,17 @@ class CartController extends GetxController {
       print(error);
     }
   }
+
+  Future<void> emptyCart() async {
+    try {
+      await CartService.emptyCart(
+          _userService.currentUser?.userId ?? "");
+      saveCartsToStorage();
+      getCartDetails();
+      _storage.remove('carts');
+
+    } catch (error) {
+      print('Failed to empty cart item');
+    }
+  }
 }

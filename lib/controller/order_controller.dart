@@ -3,54 +3,55 @@ import 'package:get/get.dart';
 import 'package:template_app/model/order_model.dart';
 import 'package:template_app/service/order_service.dart';
 
+import '../model/cart_model.dart';
 import '../service/user_service.dart';
+import 'cart_controller.dart';
+import 'notifi_controlle.dart';
 
 class OrderController extends GetxController {
   final UserService userService = UserService();
   final RxList<Order> orders = <Order>[].obs;
+  final OrderService _orderService = OrderService();
+  final CartController _cartController = Get.put(CartController());
+  final NotifiController _notifiController = Get.put(NotifiController());
 
   @override
-  
   void onInit() {
     super.onInit();
     getOrdersByUserId();
   }
 
-    Future<void> getOrdersByUserId() async {
+  Future<void> getOrdersByUserId() async {
     try {
       final responseData = await OrderService.getOrdersByUserId(
           userService.currentUser?.userId ?? "");
-           orders.assignAll(responseData);
+      orders.assignAll(responseData);
     } catch (error) {
       // Handle exceptions
       print(error);
     }
   }
 
+  Future<void> submitOrder(List<CartItem> cartItems) async {
+    try {
+      final dynamic response = await _orderService.createOrder(
+        userId: userService.currentUser?.userId ?? "",
+        items: cartItems,
+        phoneNumber: userService.currentUser?.phoneNumber ?? "",
+        address: userService.currentUser?.address ?? "",
+        email: userService.currentUser?.email ?? "",
+        customerName: userService.currentUser?.fullName ?? "",
+      );
+      _cartController.emptyCart();
+      getOrdersByUserId();
+      _notifiController.showNotifi(
+        "Đặt hàng thành công",
+        Colors.green,
+        Colors.white,
+      );
+      Get.toNamed('/home');
+    } catch (error) {
+      print(error);
+    }
+  }
 }
-
-
-// Future<void> createOrder(String userId, String productId, String price,
-//       String productName, int quantity, String tempValue) async {
-//     final List<OrderItem> tempOrders = List<OrderItem>.from(orders);
-//     try {
-//       String userId = userService.currentUser?.userId ?? "";
-//       await OrderService.createOrder(userId, productId, price, productName,quantity, tempValue);
-//       final OrderItem newOrderItem = OrderItem(
-//         // Tạo đối tượng OrderItem mới với các thông tin tương ứng
-//         productId: productId,
-//         price: price,
-//         quantity: quantity,
-//         productName: '',
-//         tempValue: '',
-//       );
-//       tempOrders.add(newOrderItem); // Thêm sản phẩm mới vào danh sách tạm thời
-//       orders.assignAll(tempOrders); // Gán danh sách tạm thời vào `carts`
-//       fetchOrderDetails();
-//       print('Product added to cart');
-//     } catch (error) {
-//       print('Failed to add product to cart');
-//     }
-//   }
-
-

@@ -37,6 +37,9 @@ class API {
   static String getCart(String userId) {
     return '$baseUrl/cart/detail/$userId';
   }
+  static String emptyCart(String user_id) {
+    return '$baseUrl/cart/empty/$user_id';
+  }
 
   static String removeFromCart(String user_id, String product_id) {
     return '$baseUrl/cart/delete/$user_id/$product_id';

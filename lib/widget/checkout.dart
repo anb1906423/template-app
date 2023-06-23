@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:template_app/config/app_config.dart';
 import 'package:template_app/model/cart_model.dart';
+import 'package:template_app/model/order_model.dart';
 import 'package:template_app/widget/cart.dart';
 import 'package:template_app/widget/common/my_app_bar.dart';
 import 'package:template_app/widget/common/my_bottom_bar.dart';
 
 import '../controller/cart_controller.dart';
+import '../controller/order_controller.dart';
 import '../service/user_service.dart';
 import '../util/format_util.dart';
 
@@ -36,6 +38,8 @@ class Checkout extends GetView<CartController> {
     final _userService = Get.put(UserService());
     final totalValue = double.parse(controller.total.value);
     final calculatedTotal = totalValue + 20000;
+    final OrderController orderController = Get.find<OrderController>();
+    final userId = _userService.currentUser?.userId ?? "";
 
     return Column(
       children: [
@@ -130,7 +134,6 @@ class Checkout extends GetView<CartController> {
                                     _userService.currentUser?.fullName ?? "";
                                 String address =
                                     _userService.currentUser?.address ?? "";
-
                                 if (phoneNumber.isEmpty ||
                                     fullName.isEmpty ||
                                     address.isEmpty) {
@@ -146,12 +149,25 @@ class Checkout extends GetView<CartController> {
                                       ),
                                       actions: <Widget>[
                                         TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(context),
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                            Get.toNamed("/profile/edit");
+                                          },
                                           child: const Text(
-                                            'OK',
+                                            'Cập nhật',
                                             style: TextStyle(
                                                 color: Colors.red,
+                                                fontSize: 20),
+                                          ),
+                                        ),
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text(
+                                            'Cancel',
+                                            style: TextStyle(
+                                                color: Colors.grey,
                                                 fontSize: 20),
                                           ),
                                         ),
@@ -182,9 +198,11 @@ class Checkout extends GetView<CartController> {
                                         ),
                                         TextButton(
                                           onPressed: () {
-                                            // Thực hiện đặt hàng
-                                            // ...
-                                            Navigator.pop(context);
+                                            // Tạo đơn hàng và lưu vào cơ sở dữ liệu
+                                            final List<CartItem> cartItems =
+                                                controller.carts.toList();
+                                            orderController
+                                                .submitOrder(cartItems);
                                           },
                                           child: const Text(
                                             'Đồng ý',
@@ -289,8 +307,7 @@ class Checkout extends GetView<CartController> {
               itemBuilder: (context, i) {
                 final CartItem cartItem = controller.carts[i];
                 return Padding(
-                  padding:
-                      const EdgeInsets.only(left: 0, right: 0, bottom: 0),
+                  padding: const EdgeInsets.only(left: 0, right: 0, bottom: 0),
                   child: CartItemCard(
                     productId: controller.carts[i].productId,
                     cardItem: controller.carts[i],
