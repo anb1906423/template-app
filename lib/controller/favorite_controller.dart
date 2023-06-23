@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:template_app/controller/notifi_controlle.dart';
@@ -11,6 +12,7 @@ class FavoriteController extends GetxController {
   final FavoriteService _favoriteService = FavoriteService();
   RxList<FavoriteModel> favorites = <FavoriteModel>[].obs;
   final _userService = UserService();
+
 
   Future<void> getFavoritesByUserId(String userId) async {
     try {

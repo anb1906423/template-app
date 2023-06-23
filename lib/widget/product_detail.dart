@@ -14,16 +14,17 @@ import '../util/format_util.dart';
 
 class ProductDetail extends GetView<ProductDetailController> {
   const ProductDetail({Key? key}) : super(key: key);
- 
+
   @override
   Widget build(BuildContext context) {
     final _userService = UserService();
     CartController cartController = Get.find<CartController>();
-    final FavoriteController favoriteController = Get.find<FavoriteController>();
+    final FavoriteController favoriteController =
+        Get.find<FavoriteController>();
     bool isFavorite = favoriteController.isProductFavorite(
         _userService.currentUser?.userId ?? "", controller.product!.id);
     print(isFavorite);
-    
+
     return Scaffold(
       appBar: MyAppBar(
         title: 'chi tiet'.tr,

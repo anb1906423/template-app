@@ -18,7 +18,17 @@ class Cart extends GetView<CartController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(title: 'gio hang'.tr),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            // Xử lý khi người dùng nhấn nút back arrow
+            Get.toNamed("/product"); // Chuyển về trang có route "/home"
+          },
+        ),
+        title: Text('gio hang'.tr),
+        backgroundColor: Colors.pink.shade100,
+      ),
       backgroundColor: Colors.pink.shade50,
       body: Column(
         children: <Widget>[

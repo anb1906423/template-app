@@ -21,9 +21,16 @@ class Product extends GetView<ProductController> {
     // Dùng getX gọi lớp ProductService
     Get.put(ProductService());
     return Scaffold(
-      appBar: MyAppBar(
-        title: "san pham".tr,
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Get.toNamed("/home");
+          },
+        ),
         actions: [filter(), badge()],
+        title: Text('san pham'.tr),
+        backgroundColor: Colors.pink.shade100,
       ),
       backgroundColor: Colors.pink.shade50,
       body: Obx(
