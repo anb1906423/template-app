@@ -159,7 +159,7 @@ class UserService extends GetxService {
       if (response.statusCode == 200) {
         // Cập nhật thông tin người dùng thành công
         setCurrentUser(updatedUser, updatedUser.userId);
-        Get.toNamed("/profile");
+        Get.offAllNamed("/profile");
         _notifiController.showNotifi(
           "Cập nhập thông tin thành công",
           Colors.green,
