@@ -17,7 +17,7 @@ class OrderDetail extends GetView<OrderController> {
     OrderController orderController = Get.find<OrderController>();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Order Detail'),
+        title: Text('chi tiet don hang'.tr),
         backgroundColor: Colors.pink[100],
       ),
       body: GetBuilder<OrderController>(

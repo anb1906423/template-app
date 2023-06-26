@@ -30,12 +30,12 @@ class Product extends GetView<ProductController> {
     Get.put(ProductService());
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Get.toNamed("/home");
-          },
-        ),
+        // leading: IconButton(
+        //   icon: Icon(Icons.arrow_back),
+        //   onPressed: () {
+        //     Get.toNamed("/home");
+        //   },
+        // ),
         actions: [filter(), badge()],
         title: Text('san pham'.tr),
         backgroundColor: Colors.pink.shade100,
