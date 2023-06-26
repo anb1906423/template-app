@@ -11,14 +11,20 @@ import '../controller/cart_controller.dart';
 import '../service/product_service.dart';
 import '../service/user_service.dart';
 import '../util/format_util.dart';
+import '../controller/favorite_controller.dart';
 
 class Home extends GetView<ProductController> {
-  CartController cartController = Get.find<CartController>();
-  
   Home({Key? key}) : super(key: key);
+  final _userService = UserService();
+  CartController cartController = Get.find<CartController>();
+  final FavoriteController favoriteController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     Get.put(ProductService());
+    favoriteController
+        .getFavoritesByUserId(_userService.currentUser?.userId ?? "");
+        
     return Scaffold(
       backgroundColor: Colors.pink.shade50,
       appBar: MyAppBar(title: "trang chu".tr),
