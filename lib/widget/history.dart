@@ -66,8 +66,13 @@ class History extends GetView<OrderController> {
               final order = controller.orders[index];
               final firstItem = order.items.first;
               final formatter = DateFormat('dd/MM/yyyy hh:mm:ss');
+              double totalCost = double.parse(order.total) +
+                  double.parse(order.deliveryCharges);
 
               return Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
                 margin: const EdgeInsets.all(10),
                 child: InkWell(
                   onTap: () {
@@ -82,11 +87,17 @@ class History extends GetView<OrderController> {
                         SizedBox(height: 8.0),
                         Row(
                           children: [
-                            Text(
-                              "${order.id}",
-                              style: TextStyle(
-                                fontSize: 17,
-                                color: Colors.black87,
+                            SizedBox(
+                              width: 160,
+                              child: Text(
+                                "${order.id}",
+                                style: TextStyle(
+                                  fontSize: 17,
+                                  color: Colors.black87,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                textScaleFactor: 1,
                               ),
                             ),
                             Spacer(),
@@ -100,7 +111,7 @@ class History extends GetView<OrderController> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 8.0),
+                        SizedBox(height: 12.0),
                         Row(
                           children: <Widget>[
                             Text(
@@ -112,7 +123,7 @@ class History extends GetView<OrderController> {
                             ),
                             Spacer(),
                             Text(
-                              "${order.total} \VNĐ",
+                              "${NumberFormat.decimalPattern().format(totalCost)} \VNĐ",
                               style: TextStyle(
                                 fontSize: 15,
                                 color: Colors.black54,
