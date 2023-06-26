@@ -27,8 +27,8 @@ class ProductDetail extends GetView<ProductDetailController> {
 
     return Scaffold(
       appBar: MyAppBar(
-        title: 'chi tiet'.tr,
-        actions: [filter(), badge()],
+        title: 'chi tiet san pham'.tr,
+        // actions: [filter(), badge()],
       ),
       backgroundColor: Colors.pink.shade50,
       body: SingleChildScrollView(

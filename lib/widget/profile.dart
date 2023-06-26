@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:template_app/config/app_config.dart';
+import 'package:template_app/widget/common/my_app_bar.dart';
 import 'package:template_app/widget/common/my_bottom_bar.dart';
 
 import '../controller/user_controller.dart';
@@ -16,9 +17,8 @@ class Profile extends StatelessWidget {
     final UserController userController = Get.put(UserController());
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('trang ca nhan'.tr),
-        backgroundColor: Colors.pink.shade100,
+      appBar: MyAppBar(
+        title:'trang ca nhan'.tr
       ),
       backgroundColor: Colors.pink.shade50,
       body: Container(
