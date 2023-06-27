@@ -2,27 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:template_app/controller/product_controller.dart';
 import 'package:template_app/model/product_model.dart';
-import 'package:template_app/widget/common/my_app_bar.dart';
 import 'package:template_app/widget/common/my_bottom_bar.dart';
-import 'package:template_app/widget/favorite.dart';
+
 import '../controller/cart_controller.dart';
 import '../controller/favorite_controller.dart';
 import '../service/product_service.dart';
 import '../service/user_service.dart';
 import '../util/format_util.dart';
 
-CartController cartController = Get.find<CartController>();
 int totalQuantity = 0;
 
 class Product extends GetView<ProductController> {
   Product({Key? key}) : super(key: key);
   final _userService = UserService();
   final FavoriteController favoriteController = Get.find();
-  
 
   @override
   Widget build(context) {
-
     favoriteController
         .getFavoritesByUserId(_userService.currentUser?.userId ?? "");
 
@@ -74,6 +70,7 @@ class Product extends GetView<ProductController> {
 
   Widget _productGridTile({required context, required ProductModel product}) {
     final userService = UserService();
+    CartController cartController = Get.find<CartController>();
 
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
@@ -161,6 +158,8 @@ Widget filter() {
 }
 
 Widget badge() {
+  CartController cartController = Get.find<CartController>();
+
   return Stack(
     alignment: Alignment.center,
     children: [

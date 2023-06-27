@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:template_app/controller/cart_controller.dart';
 import 'package:template_app/model/favorite_model.dart';
 import 'package:template_app/widget/product.dart';
 
@@ -25,8 +26,7 @@ class Favorite extends GetView<FavoriteController> {
         backgroundColor: Colors.pink.shade100,
       ),
       backgroundColor: Colors.pink.shade50,
-      
-      body:Obx(
+      body: Obx(
         () {
           if (controller.favorites.isEmpty) {
             return Center(
@@ -51,15 +51,14 @@ class Favorite extends GetView<FavoriteController> {
               ),
             );
           }
-          
         },
       ),
-
     );
   }
 
   Widget favoriteGridTile({required context, required FavoriteModel favorite}) {
     final userService = UserService();
+    CartController cartController = Get.find<CartController>();
 
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
@@ -123,5 +122,3 @@ class Favorite extends GetView<FavoriteController> {
     );
   }
 }
-
-

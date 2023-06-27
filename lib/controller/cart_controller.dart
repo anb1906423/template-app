@@ -1,11 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../model/cart_model.dart';
 import '../service/cart_service.dart';
 import '../service/user_service.dart';
-import 'user_controller.dart';
 
 class CartController extends GetxController {
   final GetStorage _storage = GetStorage();
@@ -108,6 +106,9 @@ class CartController extends GetxController {
       saveCartsToStorage();
       getCartDetails();
 
+      carts.removeWhere((element) => element.productId == productId);
+
+      print("t " + carts.length.toString());
     } catch (error) {
       print('Failed to remove cart item');
     }
@@ -126,7 +127,7 @@ class CartController extends GetxController {
           cartItems.map<CartItem>((item) => CartItem.fromJson(item)).toList();
       carts.assignAll(cartItemList);
       total.value = cartTotal;
-      
+      print(cartItemList.length);
       // Lỗi login chưa load giỏ hàng ngay
       saveCartsToStorage();
     } catch (error) {
@@ -137,12 +138,10 @@ class CartController extends GetxController {
 
   Future<void> emptyCart() async {
     try {
-      await CartService.emptyCart(
-          _userService.currentUser?.userId ?? "");
+      await CartService.emptyCart(_userService.currentUser?.userId ?? "");
       saveCartsToStorage();
       getCartDetails();
       _storage.remove('carts');
-
     } catch (error) {
       print('Failed to empty cart item');
     }

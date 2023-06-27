@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:template_app/controller/cart_controller.dart';
-import 'package:template_app/model/product_model.dart';
-import 'package:template_app/util/dialog_util.dart';
-import 'package:template_app/widget/common/my_app_bar.dart';
 import 'package:template_app/widget/common/my_bottom_bar.dart';
 
-import '../controller/product_controller.dart';
 import '../model/cart_model.dart';
 import '../service/user_service.dart';
 import '../util/format_util.dart';
