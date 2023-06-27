@@ -10,27 +10,7 @@ import '../service/user_service.dart';
 
 class ProfileEdit extends StatelessWidget {
   const ProfileEdit({Key? key}) : super(key: key);
-
-  // File _image;
-
-  // Future<void> _pickImage() async {
-  //   final picker = ImagePicker();
-  //   final pickedImage = await picker.getImage(source: ImageSource.gallery);
-
-  //   setState(() {
-  //     if (pickedImage != null) {
-  //       _image = File(pickedImage.path);
-  //       // Gọi hàm xử lý upload ảnh tại đây
-  //       _uploadImage(_image);
-  //     }
-  //   });
-  // }
-
-  // Future<void> _uploadImage(File image) async {
-  //   // Xử lý upload ảnh tại đây
-  //   // ...
-  // }
-
+  
   @override
   Widget build(BuildContext context) {
     final userService = Get.put(UserService());
