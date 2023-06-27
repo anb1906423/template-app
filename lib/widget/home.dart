@@ -161,7 +161,7 @@ class Home extends GetView<ProductController> {
           const Padding(
             padding: EdgeInsets.only(left: 140),
             child: Text(
-              "Welcome  to FlowerShop !!",
+              "FlowerShop xin chào!!",
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
