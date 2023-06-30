@@ -22,24 +22,26 @@ class Product extends GetView<ProductController> {
     favoriteController
         .getFavoritesByUserId(_userService.currentUser?.userId ?? "");
 
-    // Dùng getX gọi lớp ProductService
     Get.put(ProductService());
-    return Scaffold(
-      appBar: AppBar(
-        // leading: IconButton(
-        //   icon: Icon(Icons.arrow_back),
-        //   onPressed: () {
-        //     Get.toNamed("/home");
-        //   },
-        // ),
-        actions: [filter(), badge()],
-        title: Text('san pham'.tr),
-        backgroundColor: Colors.pink.shade100,
-      ),
-      backgroundColor: Colors.pink.shade50,
-      body: Obx(
-        () {
-          if (controller.products.isEmpty) {
+
+return Scaffold(
+  appBar: AppBar(
+    actions: [filter(), badge()],
+    title: Text('san pham'.tr),
+    backgroundColor: Colors.pink.shade100,
+  ),
+  backgroundColor: Colors.pink.shade50,
+  body: Column(
+    children: [
+      Expanded(
+        child: Obx(() {
+          // Hiển thị danh sách sản phẩm cho trang hiện tại
+          final startIndex =
+              (controller.currentPage.value - 1) * controller.itemsPerPage;
+          final endIndex = startIndex + controller.itemsPerPage;
+          final displayedProducts = controller.products
+              .sublist(startIndex, endIndex.clamp(0, controller.products.length));
+          if (displayedProducts.isEmpty) {
             return Center(
               child: Text(
                 "danh sach san pham dang trong!".tr,
@@ -49,12 +51,13 @@ class Product extends GetView<ProductController> {
           } else {
             return GridView.builder(
               padding: const EdgeInsets.all(10.0),
-              itemCount: controller.products.length,
+              itemCount: displayedProducts.length,
               itemBuilder: (ctx, i) => _productGridTile(
                 context: context,
-                product: controller.products[i],
+                product: displayedProducts[i],
               ),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate:
+                  const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: 1.5 / 2,
                 crossAxisSpacing: 10,
@@ -62,10 +65,30 @@ class Product extends GetView<ProductController> {
               ),
             );
           }
-        },
+        }),
       ),
-      bottomNavigationBar: const MyBottomBar(index: 1),
-    );
+      Obx(() => Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: () => controller.goToPage(
+                    controller.currentPage.value - 1),
+              ),
+              Text('Trang ${controller.currentPage.value} / ${controller.totalPages.value}'),
+              IconButton(
+                icon: Icon(Icons.arrow_forward),
+                onPressed: () => controller.goToPage(
+                    controller.currentPage.value + 1),
+              ),
+            ],
+          )),
+    ],
+  ),
+  bottomNavigationBar: const MyBottomBar(index: 1),
+);
+
+
   }
 
   Widget _productGridTile({required context, required ProductModel product}) {
@@ -91,7 +114,6 @@ class Product extends GetView<ProductController> {
               const SizedBox(height: 5),
               Text(
                 product.title,
-                //textAlign: TextAlign.left,
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 16,
@@ -100,7 +122,6 @@ class Product extends GetView<ProductController> {
               ),
               const SizedBox(height: 5),
               Align(
-                //alignment: Alignment.centerRight,
                 child: Container(
                   child: Text(
                     '${FormatUtils.formatPrice(product.price)} VNĐ',
@@ -134,64 +155,61 @@ class Product extends GetView<ProductController> {
     );
   }
 
-  // static fromJson(data) {}
-}
-
-Widget filter() {
-  return PopupMenuButton(
-    onSelected: (value) {
-      if (value == "FilterOptions.favorite") {
-        // Chuyển đến trang khác sử dụng GetX
-        Get.toNamed('/favorite');
-      }
-    },
-    icon: const Icon(
-      Icons.more_vert,
-    ),
-    itemBuilder: (ctx) => [
-      const PopupMenuItem(
-        value: "FilterOptions.favorite",
-        child: Text('Hiển thị sản phẩm yêu thích'),
+  Widget filter() {
+    return PopupMenuButton(
+      onSelected: (value) {
+        if (value == "FilterOptions.favorite") {
+          Get.toNamed('/favorite');
+        }
+      },
+      icon: const Icon(
+        Icons.more_vert,
       ),
-    ],
-  );
-}
+      itemBuilder: (ctx) => [
+        const PopupMenuItem(
+          value: "FilterOptions.favorite",
+          child: Text('Hiển thị sản phẩm yêu thích'),
+        ),
+      ],
+    );
+  }
 
-Widget badge() {
-  CartController cartController = Get.find<CartController>();
+  Widget badge() {
+    CartController cartController = Get.find<CartController>();
 
-  return Stack(
-    alignment: Alignment.center,
-    children: [
-      IconButton(
-        icon: const Icon(Icons.shopping_cart),
-        onPressed: () {
-          Get.toNamed("/cart");
-        },
-      ),
-      Positioned(
-        right: 8,
-        top: 8,
-        child: Container(
-            padding: const EdgeInsets.all(2.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              color: Colors.red,
-            ),
-            constraints: const BoxConstraints(
-              minWidth: 16,
-              minHeight: 16,
-            ),
-            child: Obx(
-              () => Text(
-                cartController.carts.length.toString(),
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 10,
-                ),
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        IconButton(
+          icon: const Icon(Icons.shopping_cart),
+          onPressed: () {
+            Get.toNamed("/cart");
+          },
+        ),
+        Positioned(
+          right: 8,
+          top: 8,
+          child: Container(
+              padding: const EdgeInsets.all(2.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                color: Colors.red,
               ),
-            )),
-      )
-    ],
-  );
+              constraints: const BoxConstraints(
+                minWidth: 16,
+                minHeight: 16,
+              ),
+              child: Obx(
+                () => Text(
+                  cartController.carts.length.toString(),
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 10,
+                  ),
+                ),
+              )),
+        )
+      ],
+    );
+  }
 }

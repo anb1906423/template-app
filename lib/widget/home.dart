@@ -18,13 +18,14 @@ class Home extends GetView<ProductController> {
   final _userService = UserService();
   CartController cartController = Get.find<CartController>();
   final FavoriteController favoriteController = Get.find();
+  String searchInput = '';
 
   @override
   Widget build(BuildContext context) {
     Get.put(ProductService());
     favoriteController
         .getFavoritesByUserId(_userService.currentUser?.userId ?? "");
-        
+
     return Scaffold(
       backgroundColor: Colors.pink.shade50,
       appBar: MyAppBar(title: "trang chu".tr),
@@ -123,6 +124,7 @@ class Home extends GetView<ProductController> {
                   Expanded(
                     child: TextField(
                       onChanged: (value) {
+                        searchInput = value;
                         controller.searchProduct(dartz.Some(value));
                       },
                       decoration: InputDecoration(
@@ -161,7 +163,7 @@ class Home extends GetView<ProductController> {
           const Padding(
             padding: EdgeInsets.only(left: 140),
             child: Text(
-              "FlowerShop xin chào!!",
+              "FlowerShop xin chào !!",
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -221,51 +223,70 @@ class Home extends GetView<ProductController> {
     final ProductController productController = Get.put(ProductController());
 
     return SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Padding(
-          padding: EdgeInsets.only(left: 15),
-          child: Row(
-            children: <Widget>[
-              Obx(
-                () {
-                  final productList = controller.filteredProducts.isEmpty
-                      ? controller.products
-                      : controller.filteredProducts;
-                  if (productList.isEmpty) {
-                    return Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(height: 10),
-                          Text(
-                            "danh sach san pham dang trong!".tr,
-                            style: TextStyle(fontSize: 18),
-                          ),
-                        ],
-                      ),
-                    );
-                  } else
-                    return Row(
-                      children: [
-                        for (var product in productList)
-                          _itemAll(
-                            context: context,
-                            imageUrl: product.imageUrl,
-                            id: product.id,
-                            title: product.title,
-                            price: product.price,
-                            press: () {
-                              // Xử lý khi nhấn vào sản phẩm
-                              Get.toNamed("/product/detail/${product.id}");
-                            },
-                          ),
-                      ],
-                    );
-                },
-              )
-            ],
-          ),
-        ));
+      scrollDirection: Axis.horizontal,
+      child: Padding(
+        padding: EdgeInsets.only(left: 15),
+        child: Obx(
+          () {
+            final productList = productController.filteredProducts.isEmpty
+                ? productController.products
+                : productController.filteredProducts;
+            final displayedProducts =
+                productList.take(productController.itemsPerPage).toList();
+
+            if (displayedProducts.isEmpty) {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(height: 10),
+                    Text(
+                      "danh sach san pham dang trong!".tr,
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  ],
+                ),
+              );
+            } else {
+              return Row(
+                children: [
+                  Row(
+                    children: [
+                      for (var product in displayedProducts)
+                        _itemAll(
+                          context: context,
+                          imageUrl: product.imageUrl,
+                          id: product.id,
+                          title: product.title,
+                          price: product.price,
+                          press: () {
+                            // Xử lý khi nhấn vào sản phẩm
+                            Get.toNamed("/product/detail/${product.id}");
+                          },
+                        ),
+                    ],
+                  ),
+                  if (searchInput
+                      .isEmpty) // Kiểm tra điều kiện searchInput rỗng
+                    IconButton(
+                      icon: Icon(Icons.arrow_forward),
+                      onPressed: () {
+                        // Kiểm tra nếu trang hiện tại là trang cuối cùng, không làm gì cả
+                        if (productController.currentPage.value ==
+                            productController.totalPages.value) return;
+
+                        // Chuyển đến trang sản phẩm
+                        Get.toNamed('/product',
+                            arguments: productController.currentPage.value + 1);
+                      },
+                    ),
+                ],
+              );
+            }
+          },
+        ),
+      ),
+    );
   }
 
   Widget _itemAll(
